@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Centro de Notificaciones - PoultryFarm Manager</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5be830",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#152111",
+                    },
+                    fontFamily: { "display": ["Inter"] }
+                },
+            },
+        }
+    </script>
+    <style>
+        .unread-row { background-color: #f0f7ff; border-left: 4px solid #3b82f6; transition: all 0.2s; }
+        .dark .unread-row { background-color: #1e293b; border-left-color: #5be830; }
+        tr.read { opacity: 0.8; border-left: 4px solid transparent; }
+        .tab-active { border-bottom: 3px solid #5be830; color: #111b0e; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111b0e] dark:text-[#eaf3e7] min-h-screen">
+
+    <header class="flex items-center justify-between border-b border-[#eaf3e7] dark:border-[#2d3a28] px-10 py-3 bg-white dark:bg-background-dark sticky top-0 z-50">
+        <section class="flex items-center gap-8">
+            <div class="flex items-center gap-4 text-primary">
+                <span class="material-symbols-outlined text-4xl" aria-hidden="true">egg_alt</span>
+                <h2 class="text-[#111b0e] dark:text-white text-lg font-bold tracking-tight">AVISENA COL</h2>
+            </div>
+            
+            <form id="search-form" class="hidden md:block relative">
+                <label for="search-alerts" class="sr-only">Buscar alertas</label>
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#5f974e] dark:text-primary/70">search</span>
+                <input id="search-alerts" type="search" 
+                    class="w-64 pl-10 pr-4 py-2 rounded-lg border-none bg-[#eaf3e7] dark:bg-[#2d3a28] focus:ring-2 focus:ring-primary text-sm" 
+                    placeholder="Buscar alertas...">
+            </form>
+        </section>
+
+        <section class="flex items-center gap-6">
+            <button id="btn-notif" class="relative p-2 rounded-lg bg-[#eaf3e7] dark:bg-[#2d3a28] hover:bg-primary/20 transition-colors" aria-label="Ver resumen">
+                <span class="material-symbols-outlined">notifications</span>
+                <span id="unread-count-badge" class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white">4</span>
+            </button>
+            <figure class="size-10">
+                <img src="https://ui-avatars.com/api/?name=Admin+Farm&background=5be830&color=fff" alt="Perfil" class="rounded-full border-2 border-primary/30">
+            </figure>
+        </section>
+    </header>
+
+    <main class="max-w-[1200px] mx-auto px-4 py-8">
+        <section class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <header>
+                <h1 class="text-3xl font-black tracking-tight dark:text-white">Centro de Notificaciones</h1>
+                <p class="text-[#5f974e] dark:text-primary/70 text-sm mt-1">Sincronizado en tiempo real con Galpones A-1 al B-4.</p>
+            </header>
+            <nav class="flex gap-3">
+                <button id="mark-all-read" class="flex items-center gap-2 px-4 py-2 bg-[#eaf3e7] dark:bg-[#2d3a28] rounded-lg text-sm font-bold hover:bg-primary hover:text-white transition-all">
+                    <span class="material-symbols-outlined text-sm">done_all</span> Marcar todo como leído
+                </button>
+                <button onclick="location.reload()" class="p-2 bg-[#eaf3e7] dark:bg-[#2d3a28] rounded-lg hover:bg-primary/10" aria-label="Actualizar">
+                    <span class="material-symbols-outlined">refresh</span>
+                </button>
+            </nav>
+        </section>
+
+        <nav class="mb-6 border-b border-[#d5e7d0] dark:border-[#2d3a28]">
+            <ul class="flex gap-8" id="filter-tabs">
+                <li>
+                    <button data-filter="all" class="flex items-center gap-2 pb-3 text-sm font-bold tab-active">
+                        Todas <span class="bg-slate-100 dark:bg-[#2d3a28] px-2 py-0.5 rounded text-xs">5</span>
+                    </button>
+                </li>
+                <li>
+                    <button data-filter="unread" class="flex items-center gap-2 pb-3 text-sm font-bold text-[#5f974e] hover:text-primary transition-colors">
+                        No leídas <span class="bg-primary/20 text-primary-dark px-2 py-0.5 rounded text-xs">2</span>
+                    </button>
+                </li>
+                <li>
+                    <button data-filter="critical" class="flex items-center gap-2 pb-3 text-sm font-bold text-[#5f974e] hover:text-red-500 transition-colors">
+                        Críticas <span class="bg-red-100 text-red-600 px-2 py-0.5 rounded text-xs">2</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="bg-white dark:bg-[#1c2a17] rounded-xl border border-[#d5e7d0] dark:border-[#2d3a28] shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left" id="notification-table">
+                    <thead class="bg-background-light dark:bg-[#152111] text-xs font-bold uppercase tracking-wider border-b border-[#d5e7d0] dark:border-[#2d3a28]">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 w-16 text-center">Tipo</th>
+                            <th scope="col" class="px-6 py-4">Detalles del Suceso</th>
+                            <th scope="col" class="px-6 py-4 w-40 text-center">Fecha/Hora</th>
+                            <th scope="col" class="px-6 py-4 w-32 text-right">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-[#d5e7d0] dark:divide-[#2d3a28]">
+                        <tr class="unread-row" data-type="critical" data-status="unread">
+                            <td class="px-6 py-4 text-center">
+                                <span class="material-symbols-outlined p-2 rounded-full bg-red-100 text-red-600">warning</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <article>
+                                    <h3 class="text-red-600 font-black text-base">Alta Mortalidad: Galpón 4</h3>
+                                    <p class="text-[#5f974e] dark:text-primary/60 text-sm">El índice ha superado el umbral del 2% en las últimas 4 horas.</p>
+                                </article>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-center">Hace 5 min</td>
+                            <td class="px-6 py-4 text-right">
+                                <button onclick="markAsRead(this)" class="bg-primary text-[#111b0e] px-4 py-1.5 rounded-lg text-sm font-bold shadow hover:scale-105 transition-transform">Ver</button>
+                            </td>
+                        </tr>
+
+                        <tr class="read" data-type="production" data-status="read">
+                            <td class="px-6 py-4 text-center">
+                                <span class="material-symbols-outlined p-2 rounded-full bg-primary/20 text-primary">trending_up</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <article>
+                                    <h3 class="font-semibold text-base">Producción: Incremento del 5%</h3>
+                                    <p class="text-[#5f974e] dark:text-primary/60 text-sm">Recolección optimizada en Lote 2024-B.</p>
+                                </article>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-center">Hace 12 min</td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-primary font-bold text-sm hover:underline">Detalles</button>
+                            </td>
+                        </tr>
+
+                        <tr class="unread-row" data-type="operational" data-status="unread">
+                            <td class="px-6 py-4 text-center">
+                                <span class="material-symbols-outlined p-2 rounded-full bg-orange-100 text-orange-600">inventory_2</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <article>
+                                    <h3 class="font-bold text-base">Silo A: Nivel Bajo (15%)</h3>
+                                    <p class="text-[#5f974e] dark:text-primary/60 text-sm">Se requiere pedido de reposición inmediato.</p>
+                                </article>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-center">Hace 1 hora</td>
+                            <td class="px-6 py-4 text-right">
+                                <button onclick="markAsRead(this)" class="bg-primary text-[#111b0e] px-4 py-1.5 rounded-lg text-sm font-bold shadow hover:scale-105">Ver</button>
+                            </td>
+                        </tr>
+
+                        <tr class="read" data-type="critical" data-status="read">
+                            <td class="px-6 py-4 text-center">
+                                <span class="material-symbols-outlined p-2 rounded-full bg-red-100 text-red-600">device_thermostat</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <article>
+                                    <h3 class="font-semibold text-base">Temp Crítica: Galpón 2 (32°C)</h3>
+                                    <p class="text-[#5f974e] dark:text-primary/60 text-sm">Extractores activados automáticamente.</p>
+                                </article>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-center">Hace 5 horas</td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-primary font-bold text-sm hover:underline">Detalles</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer class="mt-8 flex justify-between items-center text-[#5f974e] dark:text-primary/50 text-xs">
+            <div class="flex items-center gap-2">
+                <span class="size-2 rounded-full bg-primary animate-pulse"></span>
+                Servidor activo: Galpones en línea
+            </div>
+            <p>AVISENA COL v2.4.0 © 2025</p>
+        </footer>
+    </main>
+
+    
+
+</body>
+</html>

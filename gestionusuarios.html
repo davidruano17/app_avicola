@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Gestión de Usuarios - AVISENA COL</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#49E619",
+                        "success": "#39A900",
+                        "success-dark": "#007832",
+                        "warning": "#f59e0b",
+                        "danger": "#ef4444",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#141d1e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+    <section class="layout-container flex h-full grow flex-col">
+
+        <header
+            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark px-10 py-3">
+            <section class="flex items-center gap-4 text-primary">
+                <section class="size-14">
+                    <img src="assets/img/LogoSena.png" alt="logo">
+                </section>
+                <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">AVISENA COL
+                </h2>
+            </section>
+            <section class="flex flex-1 justify-end gap-8">
+                <section
+                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20"
+                    data-alt="Profile picture of leader instructor"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBtKXhrvxvCF_ITEgsFTQByVYf0y2sPaqQaN5P_Ogbzur5-fLRbf1ch2oEilN6g-EB0spqrqkhDmVtMRd5fOgXYcXxIFqGApRKal7WGWhQZwTpj8ow7cO78w-ibsl3UfhJmvnioR9n_lKxmV8ziQAk8fP5nk_Dfho4_trCUKfPb31t5dcr9R979qbw35Oa94AVaCOZJCH3fMdN663mVKvrqHyH6NXyOoLrCLiNA33J01IMiERUJy9OktwTZkOYOaPG8sebzhvEnDE6R");'>
+                </section>
+            </section>
+        </header>
+        <main class="flex flex-1 flex-col px-4 md:px-10 lg:px-20 xl:px-40 py-8">
+            <section class="flex flex-wrap justify-between items-end gap-4 mb-8">
+                <section class="flex flex-col gap-1">
+                    <h1 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">Gestión
+                        de Usuarios</h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-base font-normal">Administra el acceso al sistema,
+                        los roles y los datos del personal encargado de las operaciones avícolas</p>
+                </section>
+                <section class="flex flex-col lg:flex-row gap-4 justify-center">
+                    <section class="flex gap-3 flex-wrap">
+                        <button onclick="abrirModal()"
+                            class="flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary text-black text-sm font-bold shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined">person_add</span>
+                            <span>Añadir Usuario</span>
+                        </button>
+
+                    </section>
+                </section>
+            </section>
+            <!-- filtrar por numero de documento y rol -->
+            <section class="flex gap-4 mb-6">
+                <section>
+                    <label class="text-sm font-bold">Rol</label>
+                    <select id="filtroRol" class="border rounded px-3 py-2">
+                        <option value="">Todos</option>
+                        <option>Instructor lider</option>
+                        <option>Instructor investigador</option>
+                        <option>Aprendiz de contrato</option>
+                    </select>
+                </section>
+
+                <section>
+                    <label class="text-sm font-bold">Documento</label>
+                    <input id="filtroDocumento" type="text" placeholder="Buscar documento"
+                        class="border rounded px-3 py-2" />
+                </section>
+
+                <section class="flex items-end">
+                    <button onclick="aplicarFiltros()" id="tablaUsuarios"
+                        class="flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary text-black text-sm font-bold shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all">
+                        <span class="material-symbols-outlined">filter_list</span>
+                        <span>Filtrar</span>
+                    </button>
+                </section>
+            </section>
+
+            <section
+                class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+                <section class="overflow-x-auto @container">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Nombre</th>
+                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">E-mail</th>
+                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Teléfono</th>
+                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Número de
+                                    Documento</th>
+                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Rol</th>
+                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Residencia
+                                </th>
+                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Fecha de
+                                    ingreso</th>
+                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold text-right">
+                                    Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaUsuarios" class="divide-y divide-slate-100 dark:divide-slate-800">
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                        </tbody>
+                    </table>
+                </section>
+
+            </section>
+            <!-- total usuarios -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <section
+                    class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                    <section class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-3xl">groups</span>
+                    </section>
+                    <section>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Total
+                            Usuarios</p>
+                        <h3 id="totalUsuarios" class="text-2xl font-black text-slate-900 dark:text-white">0</h3>
+                    </section>
+                </section>
+                <section
+                    class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                    <section class="size-12 rounded-full bg-success/10 flex items-center justify-center text-success">
+                        <span class="material-symbols-outlined text-3xl">person_check</span>
+                    </section>
+                    <section>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
+                            Usuarios Activos</p>
+                        <h3 id="usuariosActivos" class="text-2xl font-black text-slate-900 dark:text-white">0</h3>
+                    </section>
+                </section>
+                <section
+                    class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                    <section class="size-12 rounded-full bg-warning/10 flex items-center justify-center text-warning">
+                        <span class="material-symbols-outlined text-3xl">person_off</span>
+                    </section>
+                    <section>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
+                            Usuarios Inhabilitados</p>
+                        <h3 id="usuariosInactivos" class="text-2xl font-black text-slate-900 dark:text-white">0</h3>
+                    </section>
+                </section>
+            </section>
+        </main>
+        <footer class="mt-auto px-10 py-6 text-center border-t border-slate-200 dark:border-slate-800">
+            <p class="text-slate-400 dark:text-slate-500 text-xs">© 2025 AVISENA COL</p>
+        </footer>
+    </section>
+
+    <!-- modal para añadir usuario -->
+    <section id="modalUsuario" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+
+        <section class="bg-white dark:bg-slate-900 rounded-xl w-full max-w-xl p-6">
+
+            <section class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Añadir Usuario</h3>
+                <button onclick="cerrarModal()" class="text-xl text-slate-400 hover:text-danger">
+                    &times;
+                </button>
+            </section>
+
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input id="nombre" placeholder="Nombre" class="rounded-lg border p-2">
+                <input id="email" placeholder="E-mail" class="rounded-lg border p-2">
+                <input id="telefono" placeholder="Teléfono" class="rounded-lg border p-2">
+                <input id="documento" placeholder="Documento" class="rounded-lg border p-2">
+                <input id="residencia" placeholder="Residencia" class="rounded-lg border p-2">
+                <input id="fecha" type="date" class="rounded-lg border p-2">
+
+                <select id="rol" class="rounded-lg border p-2 col-span-2">
+                    <option value="">Seleccione rol</option>
+                    <option>Instructor lider</option>
+                    <option>Instructor investigador</option>
+                    <option>Aprendiz de contrato</option>
+                </select>
+            </section>
+
+            <section class="flex justify-end gap-3 mt-6">
+                <button onclick="cerrarModal()" class="px-4 py-2 rounded-lg bg-slate-200">
+                    Cancelar
+                </button>
+
+                <button onclick="guardarUsuario()" class="px-4 py-2 rounded-lg bg-primary font-bold">
+                    Guardar
+                </button>
+            </section>
+
+        </section>
+    </section>
+    <script src="assets/js/gestionusuarios.js"></script>
+</body>
+
+</html>

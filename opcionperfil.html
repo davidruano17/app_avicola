@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Perfil de Usuario - AVISENA COL</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "brand-green": "#5be830",
+                        "brand-light": "#eefde8",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400; }
+        input:disabled, select:disabled { background-color: #f8fafc; color: #94a3b8; cursor: not-allowed; border-color: #e2e8f0; }
+        .input-focus:focus { border-color: #5be830; outline: none; ring: 2px; ring-color: #5be830; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <header class="bg-white border-b border-slate-200 px-10 py-3 flex justify-between items-center sticky top-0 z-50">
+        <a href="/" class="flex items-center gap-2 text-brand-green font-bold text-lg">
+            <span class="material-symbols-outlined">eco</span>
+            <span>AVISENA COL</span>
+        </a>
+        <nav class="flex items-center gap-8">
+            <a href="#" class="text-sm font-bold text-brand-green border-b-2 border-brand-green pb-1">Perfil</a>
+            <figure id="header-avatar" class="size-9 rounded-full bg-cover bg-center border border-slate-200" style="background-image: url('https://api.dicebear.com/7.x/avataaars/svg?seed=Juan');"></figure>
+        </nav>
+    </header>
+
+    <main class="p-8 max-w-5xl mx-auto w-full space-y-6">
+        
+        <aside id="success-alert" class="hidden bg-emerald-50 border border-emerald-100 rounded-xl px-4 py-3 flex items-center gap-3 text-emerald-700 text-sm font-medium shadow-sm animate-pulse" role="alert">
+            <span class="material-symbols-outlined text-emerald-500 text-lg">check_circle</span>
+            <p>Los cambios han sido guardados exitosamente.</p>
+        </aside>
+
+        <nav class="flex items-center gap-2 text-xs font-medium" aria-label="Breadcrumb">
+            <a href="#" class="text-brand-green">Inicio</a>
+            <span class="material-symbols-outlined text-slate-300 text-[14px]">chevron_right</span>
+            <span class="text-slate-500">Perfil de Usuario</span>
+        </nav>
+
+        <section class="bg-white rounded-2xl border border-slate-200 p-8 flex flex-col items-center text-center shadow-sm">
+            <figure class="relative group">
+                <picture id="profile-display" class="block size-32 rounded-full border-4 border-white shadow-md bg-cover bg-center overflow-hidden" style="background-image: url('https://api.dicebear.com/7.x/avataaars/svg?seed=Juan');">
+                </picture>
+                <input type="file" id="file-input" class="hidden" accept="image/*">
+                <button type="button" onclick="document.getElementById('file-input').click()" class="absolute bottom-1 right-1 bg-brand-green text-white rounded-full p-1.5 border-2 border-white shadow-sm hover:scale-110 transition-transform" aria-label="Cambiar foto de perfil">
+                    <span class="material-symbols-outlined text-sm">photo_camera</span>
+                </button>
+            </figure>
+            <h1 id="user-title-name" class="text-2xl font-bold text-slate-800 mt-4">Juan Pérez</h1>
+            <p id="user-title-role" class="text-slate-500 text-sm font-medium">Administrador Principal</p>
+            
+            <button type="button" onclick="document.getElementById('file-input').click()" class="mt-4 flex items-center gap-2 px-6 py-2 bg-slate-100 text-slate-700 rounded-lg text-xs font-bold hover:bg-slate-200 transition-all">
+                <span class="material-symbols-outlined text-base">upload</span> Cambiar Foto
+            </button>
+        </section>
+
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <header class="px-8 py-5 border-b border-slate-50 flex justify-between items-center">
+                <h2 class="font-bold text-slate-800">Información Personal</h2>
+                <span id="edit-badge" class="px-3 py-1 bg-slate-100 text-slate-400 text-[10px] font-bold rounded-full uppercase tracking-wider transition-colors">Modo Lectura</span>
+            </header>
+
+            <form id="profile-form" class="p-8">
+                <fieldset id="form-fields" disabled class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+                    <p class="flex flex-col gap-1.5">
+                        <label for="in-nombre" class="text-xs font-bold text-slate-600 uppercase tracking-tight">Nombre Completo</label>
+                        <input id="in-nombre" type="text" value="Juan Pérez" class="w-full rounded-xl border-slate-200 p-3 text-sm input-focus">
+                    </p>
+                    <p class="flex flex-col gap-1.5">
+                        <label for="in-email" class="text-xs font-bold text-slate-600 uppercase tracking-tight">Correo Electrónico</label>
+                        <input id="in-email" type="email" value="juan.perez@granjadigital.com" class="w-full rounded-xl border-slate-200 p-3 text-sm input-focus">
+                    </p>
+                    <p class="flex flex-col gap-1.5">
+                        <label for="in-tel" class="text-xs font-bold text-slate-600 uppercase tracking-tight">Número de Teléfono</label>
+                        <input id="in-tel" type="text" value="+57 310 123 4567" class="w-full rounded-xl border-slate-200 p-3 text-sm input-focus">
+                    </p>
+                    <p class="flex flex-col gap-1.5">
+                        <label for="in-rol" class="text-xs font-bold text-slate-600 uppercase tracking-tight flex items-center gap-1">Rol <span class="material-symbols-outlined text-[14px]">lock</span></label>
+                        <input id="in-rol" type="text" value="Administrador de Granja" disabled class="w-full rounded-xl border-slate-200 p-3 text-sm">
+                    </p>
+                    <p class="flex flex-col gap-1.5">
+                        <label for="in-fecha" class="text-xs font-bold text-slate-600 uppercase tracking-tight">Fecha de Nacimiento</label>
+                        <input id="in-fecha" type="date" value="1985-06-15" class="w-full rounded-xl border-slate-200 p-3 text-sm input-focus">
+                    </p>
+                    <p class="flex flex-col gap-1.5">
+                        <label for="in-sexo" class="text-xs font-bold text-slate-600 uppercase tracking-tight">Sexo (Opcional)</label>
+                        <select id="in-sexo" class="w-full rounded-xl border-slate-200 p-3 text-sm input-focus">
+                            <option selected>Masculino</option>
+                            <option>Femenino</option>
+                            <option>Otro</option>
+                        </select>
+                    </p>
+                    <p class="flex flex-col gap-1.5">
+                        <label for="in-ciudad" class="text-xs font-bold text-slate-600 uppercase tracking-tight">Ciudad</label>
+                        <input id="in-ciudad" type="text" value="Bucaramanga" class="w-full rounded-xl border-slate-200 p-3 text-sm input-focus">
+                    </p>
+                    <p class="flex flex-col gap-1.5">
+                        <label for="in-barrio" class="text-xs font-bold text-slate-600 uppercase tracking-tight">Barrio / Vereda</label>
+                        <input id="in-barrio" type="text" value="Vereda La Esperanza" class="w-full rounded-xl border-slate-200 p-3 text-sm input-focus">
+                    </p>
+                </fieldset>
+
+                <footer class="mt-10 pt-8 border-t border-slate-50 flex justify-end items-center gap-4">
+                    <button type="button" id="btn-cancel" class="hidden text-sm font-bold text-slate-400 hover:text-red-500 transition-colors">Cancelar</button>
+                    <button type="button" id="btn-edit" class="px-8 py-2.5 bg-brand-light text-slate-700 rounded-xl text-sm font-bold hover:bg-slate-200 transition-all">Editar</button>
+                    <button type="submit" id="btn-save" class="hidden px-8 py-2.5 bg-brand-green text-white rounded-xl text-sm font-bold shadow-sm hover:opacity-90 transition-all flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">save</span> Guardar Cambios
+                    </button>
+                </footer>
+            </form>
+        </section>
+    </main>
+
+    <script src="assets/js/perfil.js"></script>
+</body>
+</html>
