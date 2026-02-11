@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AVISENA COL - Gestión de Alimentación</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 
+                        "primary": "#49e619",
+                      
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Estilo para la barra de progreso en navegadores modernos */
+        progress::-webkit-progress-value { transition: width 0.5s ease; }
+    </style>
+</head>
+<body class="bg-[#f8faf6] min-h-screen text-slate-800">
+
+    <header class="bg-white border-b border-slate-100 sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <header class="flex items-center gap-8">
+                <figure class="flex items-center gap-3">
+                    <picture class=" p-1.5 rounded-lg block shadow-sm">
+                        <img src="proyecto-avicola-js/asset/img/logo-sena-verde-complementario-svg-2022.svg" class="w-8 h-8 object-contain" alt="SENA">
+                    </picture>
+                    <figcaption class="text-xl font-black tracking-tighter uppercase text-avisena-dark">
+                        AVISENA COL
+                    </figcaption>
+                </figure>
+                
+                <ul class="hidden md:flex gap-6 text-sm font-bold text-slate-500 list-none">
+                    <li><a href="#" class="hover:text-primary transition-colors">📦 Lotes</a></li>
+                    <li><a href="#" class="text-primary border-b-2 border-primary pb-1">🌾 Alimentación</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">🏥 Salud</a></li>
+                </ul>
+            </header>
+
+            <menu class="flex items-center gap-4 list-none">
+                <li>
+                    <input type="search" placeholder="🔍 Buscar..." 
+                        class="bg-slate-100 border-none rounded-lg px-4 py-2 text-sm w-48 focus:ring-2 focus:ring-primary outline-none">
+                </li>
+                <li>
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=49e619&color=fff" 
+                        class="w-10 h-10 rounded-full border-2 border-primary" alt="Perfil">
+                </li>
+            </menu>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-8 space-y-10">
+        
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+            <hgroup>
+                <h1 class="text-4xl font-black tracking-tight text-slate-900">Gestión de Alimentación</h1>
+                <p class="text-slate-500 font-medium mt-1">Supervise los niveles de silos y gestione los cronogramas de nutrición diaria.</p>
+            </hgroup>
+            <button id="btnOpen" class="bg-primary text-black px-6 py-3 rounded-xl font-black shadow-lg shadow-primary/30 hover:scale-105 active:scale-95 transition-all">
+                + Registrar Alimentación
+            </button>
+        </header>
+
+        <section aria-labelledby="silos-title">
+            <h2 id="silos-title" class="text-xl font-black mb-6 flex items-center gap-2">
+                <span class="text-primary">📊</span> Estado Crítico de Silos
+            </h2>
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <article class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm transition-all hover:shadow-md">
+                    <header class="flex justify-between mb-4">
+                        <strong class="text-[10px] uppercase text-slate-400 tracking-widest font-bold">Iniciador (Starter)</strong>
+                        <b class="text-green-500 text-xs bg-green-50 px-2 py-1 rounded-full">85%</b>
+                    </header>
+                    <p class="text-4xl font-black mb-4 text-avisena-dark">85%</p>
+                    <progress value="85" max="100" class="w-full h-3 block appearance-none [&::-webkit-progress-bar]:bg-slate-100 [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:bg-primary [&::-webkit-progress-value]:rounded-full"></progress>
+                    <footer class="mt-4 text-[11px] text-slate-400 font-medium italic">✅ Estado óptimo.</footer>
+                </article>
+
+                <article class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm transition-all hover:shadow-md">
+                    <header class="flex justify-between mb-4">
+                        <strong class="text-[10px] uppercase text-slate-400 tracking-widest font-bold">Crecimiento (Grower)</strong>
+                        <b class="text-orange-500 text-xs bg-orange-50 px-2 py-1 rounded-full">42%</b>
+                    </header>
+                    <p class="text-4xl font-black mb-4 text-avisena-dark">42%</p>
+                    <progress value="42" max="100" class="w-full h-3 block appearance-none [&::-webkit-progress-bar]:bg-slate-100 [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:bg-yellow-400 [&::-webkit-progress-value]:rounded-full"></progress>
+                    <footer class="mt-4 text-[11px] text-slate-500 font-medium italic">⚠️ Nivel medio.</footer>
+                </article>
+
+                <article class="bg-white p-6 rounded-3xl border-2 border-red-500 shadow-sm transition-all hover:shadow-md">
+                    <header class="flex justify-between mb-4">
+                        <strong class="text-[10px] uppercase text-red-400 tracking-widest font-bold">Postura (Layer)</strong>
+                        <b class="text-red-500 text-xs bg-red-50 px-2 py-1 rounded-full animate-pulse">12%</b>
+                    </header>
+                    <p class="text-4xl font-black text-red-600 mb-4">12%</p>
+                    <progress value="12" max="100" class="w-full h-3 block appearance-none [&::-webkit-progress-bar]:bg-slate-100 [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:bg-red-500 [&::-webkit-progress-value]:rounded-full"></progress>
+                    <footer class="mt-4 text-[11px] text-red-500 font-bold italic">🚨 Nivel crítico. Reabastecer.</footer>
+                </article>
+            </section>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <aside class="space-y-6">
+                <h2 class="text-xl font-black text-avisena-dark">📅 Cronogramas</h2>
+                <article class="bg-white p-5 rounded-3xl border border-slate-100 space-y-4">
+                    <header class="flex justify-between items-center">
+                        <b class="bg-green-100 text-green-700 text-[10px] px-2 py-1 rounded font-bold">LOTE A-12</b>
+                        <time class="text-[10px] font-bold text-slate-400 uppercase">Hoy</time>
+                    </header>
+                    <h4 class="font-bold text-slate-800">Iniciador Premium</h4>
+                    <footer class="flex gap-4 text-[11px] font-bold text-slate-400">
+                        <span>⚖️ 120kg</span>
+                        <span>🔄 2x día</span>
+                    </footer>
+                </article>
+            </aside>
+
+            <section class="lg:col-span-2 space-y-6">
+                <header class="flex justify-between items-center">
+                    <h2 class="text-xl font-black text-avisena-dark">📝 Registro Reciente</h2>
+                    <button class="text-primary font-bold text-sm hover:underline">📥 Exportar CSV</button>
+                </header>
+                <article class="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 text-[11px] uppercase font-black text-slate-400">
+                            <tr>
+                                <th class="px-6 py-4">Fecha</th>
+                                <th class="px-6 py-4">Lote</th>
+                                <th class="px-6 py-4 text-right">Cant.</th>
+                                <th class="px-6 py-4">Operador</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaBody" class="divide-y divide-slate-50">
+                            </tbody>
+                    </table>
+                </article>
+            </section>
+        </section>
+    </main>
+
+    <section id="modalSection" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <article class="bg-white rounded-[32px] w-full max-w-md overflow-hidden shadow-2xl">
+            <header class="p-8 pb-0 flex justify-between items-center">
+                <h2 class="text-2xl font-black text-avisena-dark">Registrar Dieta</h2>
+                <button id="btnClose" class="text-slate-400 hover:text-red-500 font-bold text-2xl transition-colors">×</button>
+            </header>
+            <form id="formRegistro" class="p-8 space-y-5">
+                <fieldset class="border-none p-0 m-0 space-y-4">
+                    <label class="block">
+                        <strong class="text-[10px] uppercase text-slate-400 block mb-2 font-bold">Seleccionar Silo</strong>
+                        <select id="siloSelect" class="w-full bg-slate-100 border-none rounded-2xl h-12 px-4 font-bold outline-none focus:ring-2 focus:ring-primary appearance-none">
+                            <option value="Starter">Lote A-12 (Starter)</option>
+                            <option value="Grower">Lote B-05 (Grower)</option>
+                            <option value="Layer">Lote C-02 (Layer)</option>
+                        </select>
+                    </label>
+                    <label class="block">
+                        <strong class="text-[10px] uppercase text-slate-400 block mb-2 font-bold">Cantidad (kg)</strong>
+                        <input id="cantidad" type="number" placeholder="0.00" 
+                            class="w-full bg-slate-100 border-none rounded-2xl h-12 px-4 font-bold outline-none focus:ring-2 focus:ring-primary">
+                    </label>
+                </fieldset>
+                <button type="submit" class="w-full bg-primary text-black py-4 rounded-2xl font-black shadow-lg shadow-primary/30 hover:scale-[1.02] active:scale-95 transition-all">
+                    Confirmar Registro
+                </button>
+            </form>
+        </article>
+    </section>
+
+    <script src="assets/js/alimentacin.js"></script>
+</body>
+</html>

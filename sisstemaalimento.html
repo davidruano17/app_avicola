@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Sistema de Alimentación - 100% Semántico</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#38a800",
+            "primary-light": "#ebf4e6",
+            secondary: "#3DB0BF",
+            background: "#f8faf7",
+          },
+          fontFamily: { sans: ["Lexend", "sans-serif"] },
+        },
+      },
+    };
+  </script>
+  <style>
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 18px; height: 18px;
+      background: #38a800; cursor: pointer;
+      border-radius: 50%; border: 3px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .nav-item.active { background-color: #38a800; color: white; box-shadow: 0 10px 15px -3px rgba(56, 168, 0, 0.3); }
+  </style>
+</head>
+
+<body class="bg-background text-[#121d0c] min-h-screen flex flex-col">
+
+  <header class="flex items-center justify-between bg-white px-8 py-3 border-b border-gray-100 sticky top-0 z-50">
+    <figure class="flex items-center gap-2 cursor-pointer" onclick="window.location.reload()">
+      <span class="material-symbols-outlined text-primary text-3xl">grass</span>
+      <figcaption class="text-lg font-bold tracking-tight">Sistema de Alimentación</figcaption>
+    </figure>
+
+    <nav class="flex items-center gap-8">
+      <ul class="flex gap-6 list-none text-sm font-semibold text-gray-600">
+        <li><a href="#" class="hover:text-primary transition-colors">Dashboard</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Lotes</a></li>
+        <li><a href="#" class="text-primary font-bold border-b-2 border-primary pb-1">Alimentación</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Inventario</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Reportes</a></li>
+      </ul>
+      <menu class="flex items-center gap-3 border-l pl-6 border-gray-100 list-none">
+        <li><button class="p-2 bg-primary-light text-primary rounded-lg hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined">settings</span></button></li>
+        <li><button class="p-2 bg-primary-light text-primary rounded-lg relative hover:bg-primary hover:text-white transition-all">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white"></span>
+        </button></li>
+        <li><img src="https://ui-avatars.com/api/?name=Admin&background=38a800&color=fff" alt="User" class="size-9 rounded-full border border-gray-200"></li>
+      </menu>
+    </nav>
+  </header>
+
+  <main class="flex flex-1">
+    
+    <aside class="w-64 bg-white border-r border-gray-50 p-6 sticky top-[65px] h-[calc(100vh-65px)]">
+      <header class="mb-8">
+        <h1 class="text-sm font-extrabold text-gray-800 uppercase tracking-tight">Granja Avícola Central</h1>
+        <small class="text-primary font-semibold text-xs">Administrador de Nutrición</small>
+      </header>
+
+      <nav aria-label="Menú principal">
+        <ul id="main-nav" class="space-y-2 list-none p-0">
+          <li>
+            <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 text-gray-600 hover:bg-gray-50 rounded-xl transition-all">
+              <span class="material-symbols-outlined">dashboard</span>
+              <span class="text-sm font-bold">Vista General</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item active flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all text-white">
+              <span class="material-symbols-outlined">tune</span>
+              <span class="text-sm font-bold">Configuración</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 text-gray-600 hover:bg-gray-50 rounded-xl transition-all">
+              <span class="material-symbols-outlined">layers</span>
+              <span class="text-sm font-bold">Lotes Activos</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 text-gray-600 hover:bg-gray-50 rounded-xl transition-all">
+              <span class="material-symbols-outlined">monitoring</span>
+              <span class="text-sm font-bold">Análisis de Salud</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 text-gray-600 hover:bg-gray-50 rounded-xl transition-all">
+              <span class="material-symbols-outlined">history</span>
+              <span class="text-sm font-bold">Logs de Sistema</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <section class="flex-1 p-10 overflow-y-auto">
+      
+      <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-xs font-bold mb-6">
+        <a href="#" class="text-primary">Inicio</a>
+        <span class="text-gray-300">/</span>
+        <span class="text-gray-400">Alimentación</span>
+        <span class="text-gray-300">/</span>
+        <span class="text-gray-800">Configuración de Parámetros</span>
+      </nav>
+
+      <header class="flex justify-between items-end mb-10">
+        <hgroup>
+          <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Panel de Nutrición</h2>
+          <p class="text-primary font-medium mt-1">Gestione los parámetros nutricionales y fases de postura de las aves.</p>
+        </hgroup>
+        <button id="btn-save" class="bg-primary text-white px-8 py-3 rounded-xl font-bold text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+          Guardar Configuración
+        </button>
+      </header>
+
+      <section class="grid grid-cols-12 gap-8">
+        
+        <article class="col-span-12 lg:col-span-5 bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+          <header class="flex items-center gap-2 mb-8 text-primary">
+            <span class="material-symbols-outlined font-bold">nutrition</span>
+            <h3 class="font-bold text-lg">Parámetros de Alimentación</h3>
+          </header>
+
+          <form id="nutrition-form" class="space-y-10">
+            <fieldset class="border-none p-0">
+              <label class="block text-sm font-bold text-gray-700 mb-3" for="alimento">Tipo de Alimento</label>
+              <select id="alimento" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold focus:ring-primary focus:border-primary appearance-none">
+                <option>Nutra-Grow Gold - Iniciador Premium</option>
+                <option>Bio-Layer Max - Fase Pico</option>
+              </select>
+            </fieldset>
+
+            <fieldset class="border-none p-0">
+              <header class="flex justify-between items-center mb-4">
+                <label class="text-sm font-bold text-gray-700">Gramos por Ave (Promedio)</label>
+                <output id="grams-val" class="text-2xl font-black text-primary">115 <small class="text-sm font-normal text-gray-400">g</small></output>
+              </header>
+              <input type="range" id="slider" class="w-full h-1.5 bg-gray-100 rounded-lg appearance-none accent-primary cursor-pointer" min="110" max="120" value="115">
+              
+              <aside id="alert" class="mt-6 p-4 bg-red-50 rounded-xl border border-red-100 flex items-start gap-3 hidden">
+                <span class="material-symbols-outlined text-red-500">report_problem</span>
+                <p class="text-[11px] font-semibold text-red-700 italic">Alerta: Valores superiores a 118g pueden indicar desperdicio.</p>
+              </aside>
+            </fieldset>
+
+            <fieldset class="border-none p-0">
+              <legend class="text-sm font-bold text-gray-700 mb-4">Fase de Postura</legend>
+              <nav class="grid grid-cols-3 gap-3">
+                <button type="button" class="phase-btn py-2.5 border border-gray-100 rounded-xl text-xs font-bold text-gray-600 hover:bg-gray-50 transition-all">Inicio</button>
+                <button type="button" class="phase-btn py-2.5 border-2 border-primary bg-primary-light text-primary rounded-xl text-xs font-bold shadow-sm transition-all">Pico</button>
+                <button type="button" class="phase-btn py-2.5 border border-gray-100 rounded-xl text-xs font-bold text-gray-600 hover:bg-gray-50 transition-all">Declive</button>
+              </nav>
+            </fieldset>
+          </form>
+        </article>
+
+        <section class="col-span-12 lg:col-span-7 space-y-8">
+          
+          <article class="bg-[#f0f7f8] p-8 rounded-3xl border border-[#d6e8ea]">
+            <header class="flex justify-between items-center mb-6">
+              <h3 class="font-bold text-lg text-secondary flex items-center gap-2">
+                <span class="material-symbols-outlined">assignment</span> Resumen de Dieta
+              </h3>
+              <time class="text-[10px] font-black text-secondary uppercase tracking-widest">Hace 5 min</time>
+            </header>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 list-none p-0">
+              <li class="bg-white p-5 rounded-2xl shadow-sm border border-gray-50">
+                <header class="flex justify-between mb-4">
+                  <mark class="bg-[#e7f3f4] text-secondary text-[10px] font-black px-2 py-1 rounded uppercase tracking-tighter">Lote #A-42</mark>
+                  <span class="text-[10px] font-bold text-gray-400">2,500 aves</span>
+                </header>
+                <progress class="w-full h-1.5 accent-secondary bg-gray-100 rounded-full" value="85" max="100"></progress>
+              </li>
+            </ul>
+          </article>
+
+          <article class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+            <header class="p-6 border-b border-gray-50 flex justify-between items-center">
+              <h3 class="font-bold text-gray-800">Historial de Modificaciones</h3>
+              <button class="text-primary text-xs font-bold flex items-center gap-1"><span class="material-symbols-outlined text-sm">download</span> Exportar</button>
+            </header>
+            <table class="w-full text-left">
+              <thead class="bg-gray-50/50 text-[10px] font-black text-gray-400 uppercase">
+                <tr><th class="px-6 py-4">Fecha</th><th class="px-6 py-4">Responsable</th><th class="px-6 py-4 text-right">Valor</th></tr>
+              </thead>
+              <tbody id="history" class="divide-y divide-gray-50">
+                <tr class="text-xs font-bold text-gray-700">
+                  <td class="px-6 py-4">Hoy, 10:30</td>
+                  <td class="px-6 py-4 flex items-center gap-2"><span class="size-6 bg-primary-light text-primary flex items-center justify-center rounded-full text-[8px]">AD</span> Admin</td>
+                  <td class="px-6 py-4 text-right">115g → <span class="text-primary">Pico</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </section>
+      </section>
+    </section>
+  </main>
+
+</body>
+<body>
+        <script src="assets/js/sistemaalimento.js"></script>
+</body>
+</html>

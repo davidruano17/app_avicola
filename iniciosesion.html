@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio de Sesión - AVISENA COL</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#49e619",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#152111",
+                    },
+                    fontFamily: { display: ["Inter", "sans-serif"] },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-[#111b0e] dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <header
+        class="flex items-center justify-between border-b border-solid border-[#eaf3e7] dark:border-emerald-900/30 px-6 py-4 md:px-40 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+        <section class="flex items-center gap-3">
+            <img src="proyecto-avicola-js/asset/img/logo-sena-verde-complementario-svg-2022.svg" alt="Logo SENA"
+                class="w-12 h-12 object-contain rounded-full bg-white p-1 shadow-sm border border-emerald-100">
+            <h2 class="text-[#111b0e] dark:text-slate-100 text-xl font-black uppercase tracking-tight">
+                AVISENA COL
+            </h2>
+        </section>
+        <p class="hidden md:block text-xs font-bold text-emerald-700 dark:text-emerald-400 tracking-widest uppercase">
+            Sistema de Gestión Avícola
+        </p>
+    </header>
+
+    <main class="flex-1 flex items-center justify-center px-4 py-12">
+        <article
+            class="w-full max-w-[460px] bg-white dark:bg-[#1c2e17] rounded-2xl shadow-2xl border border-[#eaf3e7] dark:border-emerald-900/30 overflow-hidden">
+
+            <header class="pt-10 px-8 text-center">
+                <h1 class="text-[#111b0e] dark:text-white text-3xl font-black">
+                    Bienvenido
+                </h1>
+                <p class="text-slate-500 dark:text-slate-400 text-base mt-2">
+                    Gestiona tu producción en <span class="text-emerald-600 font-bold">AVISENA COL</span>.
+                </p>
+            </header>
+
+            <section class="p-8 space-y-5">
+                <section class="flex flex-col gap-2">
+                    <label class="text-[#111b0e] dark:text-slate-200 text-sm font-semibold">Correo electrónico</label>
+                    <input type="email" placeholder="ejemplo@misena.edu.co"
+                        class="w-full rounded-lg text-[#111b0e] dark:text-white border border-[#d5e7d0] dark:border-emerald-900/50 bg-[#f9fcf8] dark:bg-background-dark/50 h-12 p-4 text-base transition-all" />
+                </section>
+
+                <section class="flex flex-col gap-2">
+                    <label class="text-[#111b0e] dark:text-slate-200 text-sm font-semibold">Contraseña</label>
+                    <aside class="relative">
+                        <input id="password" type="password" placeholder="••••••••"
+                            class="w-full rounded-lg text-[#111b0e] dark:text-white border border-[#d5e7d0] dark:border-emerald-900/50 bg-[#f9fcf8] dark:bg-background-dark/50 h-12 p-4 pr-12 text-base transition-all" />
+                        <button onclick="togglePassword()" type="button"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary text-xl">
+                            👁
+                        </button>
+                    </aside>
+                </section>
+
+                <a href="perfil admin.html"
+                    class="flex items-center justify-center w-full bg-primary hover:bg-[#3dbd14] text-black font-black py-4 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98] mt-2 uppercase tracking-wide">
+                    Iniciar Sesión
+                </a>
+
+                <section class="flex items-center py-4">
+                    <hr class="flex-grow border-t border-[#eaf3e7] dark:border-emerald-900/30">
+                    <span class="mx-4 text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">o</span>
+                    <hr class="flex-grow border-t border-[#eaf3e7] dark:border-emerald-900/30">
+                </section>
+
+                <section class="grid grid-cols-2 gap-4">
+                    <button type="button" id="btnGoogle"
+                        class="flex items-center justify-center gap-2 border border-[#d5e7d0] dark:border-emerald-900/50 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-background-dark transition-all font-bold text-sm">
+                        <img class="w-4 h-4"
+                            src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+                        <script src="https://accounts.google.com/gsi/client" async defer></script>
+                        Google
+                    </button>
+
+                    <button type="button" id="btnFacebook"
+                        class="flex items-center justify-center gap-2 border border-[#d5e7d0] dark:border-emerald-900/50 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-background-dark transition-all font-bold text-sm">
+                        <img class="w-4 h-4"
+                            src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"
+                            alt="Facebook">
+                        <script async defer crossorigin="anonymous"
+                            src="https://connect.facebook.net/es_LA/sdk.js"></script>
+                        Facebook
+                    </button>
+                </section>
+            </section>
+
+            <footer
+                class="bg-slate-50 dark:bg-black/20 border-t border-[#eaf3e7] dark:border-emerald-900/30 py-6 text-center">
+                <p class="text-slate-500 dark:text-slate-400 text-sm">
+                    ¿No tienes cuenta?
+                    <a href="registro usuarios.html"
+                        class="text-primary font-black hover:underline underline-offset-4 ml-1">Regístrate</a>
+                </p>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="py-8 px-6 text-center border-t border-emerald-100 dark:border-emerald-900/20">
+        <p class="text-slate-400 text-xs font-medium">
+            © 2026 AVISENA COL - SENA. Innovación y Sostenibilidad Avícola.
+        </p>
+    </footer>
+    <script src="assets/js/iniciosesion.js"></script>
+</body>
+
+</html>
