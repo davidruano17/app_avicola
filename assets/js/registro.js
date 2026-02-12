@@ -38,4 +38,84 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+}); document.addEventListener('DOMContentLoaded', () => {
+    const formulario = document.getElementById('form-registro');
+
+    formulario.addEventListener('submit', (e) => {
+        // Evita que la página se recargue
+        e.preventDefault();
+
+        // Captura el nombre para personalizar el mensaje
+        const nombre = document.getElementById('nombre').value;
+
+        // Mostrar alerta de éxito
+        Swal.fire({
+            title: '¡Registro Exitoso!',
+            text: `Bienvenido(a) ${nombre}, tu cuenta ha sido creada correctamente.`,
+            icon: 'success',
+            confirmButtonText: 'Acceder', // <--- Aquí cambiamos el texto
+            confirmButtonColor: '#22c55e', // Color verde de tu diseño
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirigir a la página de inicio de sesión
+                window.location.href = "inicio de secion.html";
+            }
+        });
+    });
+}); document.addEventListener('DOMContentLoaded', () => {
+    const formulario = document.getElementById('form-registro');
+
+    formulario.addEventListener('submit', (e) => {
+        // Detenemos el envío automático para mostrar la alerta
+        e.preventDefault();
+
+        // Obtenemos el nombre para personalizar el saludo
+        const nombreUsuario = document.getElementById('nombre').value;
+
+        // Lanzamos la alerta de éxito
+        Swal.fire({
+            title: '¡Registro Exitoso!',
+            text: `¡Bienvenido(a) ${nombreUsuario}! Tu cuenta en AVISENA COL ha sido creada.`,
+            icon: 'success',
+            confirmButtonText: 'Acceder', // El texto que pediste
+            confirmButtonColor: '#22c55e', // El verde de tu tema
+            allowOutsideClick: false, // Obliga a dar clic en el botón
+            backdrop: `rgba(11, 93, 59, 0.2)` // Fondo verde sutil
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // REDIRECCIÓN AL HOME
+                // Si tu archivo principal tiene otro nombre, cámbialo aquí (ej. "home.html")
+                window.location.href = "";
+            }
+        });
+    });
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const formulario = document.getElementById('form-registro');
+
+    formulario.addEventListener('submit', (e) => {
+        // Detenemos el envío automático para mostrar la alerta
+        e.preventDefault();
+
+        // Obtenemos el nombre para personalizar el saludo
+        const nombreUsuario = document.getElementById('nombre').value;
+
+        // Lanzamos la alerta de éxito
+        Swal.fire({
+            title: '¡Registro Exitoso!',
+            text: `¡Bienvenido(a) ${nombreUsuario}! Tu cuenta en AVISENA COL ha sido creada.`,
+            icon: 'success',
+            confirmButtonText: 'Acceder', // El texto que pediste
+            confirmButtonColor: '#22c55e', // El verde de tu tema
+            allowOutsideClick: false, // Obliga a dar clic en el botón
+            backdrop: `rgba(11, 93, 59, 0.2)` // Fondo verde sutil
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // REDIRECCIÓN AL HOME
+                // Si tu archivo principal tiene otro nombre, cámbialo aquí (ej. "home.html")
+                window.location.href = "index.html"; 
+            }
+        });
+    });
 });
