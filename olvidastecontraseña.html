@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recuperación de Contraseña</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#5be830",
+            backgroundLight: "#f6f8f6",
+            backgroundDark: "#152111",
+          },
+          fontFamily: {
+            display: ["Inter"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: Inter, sans-serif;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-white">
+
+  <main class="relative w-full min-h-screen flex items-center justify-center bg-white">
+
+    <!-- Logo -->
+    <img src="assets/images/logo-sena-verde-complementario-svg-2022.svg"
+      alt="Logo SENA" class="absolute top-10 left-10 w-20 h-20 bg-white rounded-full ">
+
+    <!-- Botón salir -->
+
+    <button onclick="window.location.href='index.html'"
+      class="absolute bottom-8 left-10 bg-primary hover:bg-[#4dd325] text-black font-bold px-10 py-2 rounded-full shadow-md transition-all active:scale-95"
+      type="button">
+      SALIR
+    </button>
+
+    <!-- Card -->
+    <section
+      class="relative w-full max-w-[420px] bg-white rounded-2xl shadow-xl px-10 py-10 text-center border border-slate-200">
+
+      <h1 class="text-slate-900 text-2xl font-extrabold">
+        Recuperación <br> de contraseña
+      </h1>
+
+      <p class="text-slate-500 text-sm mt-4 leading-relaxed">
+        Por favor ingresa el correo electrónico <br>
+        que tienes registrado en el aplicativo.
+      </p>
+
+      <!-- Form -->
+      <form id="recoverForm" class="mt-7 flex flex-col gap-4">
+
+        <input id="email" type="email" placeholder="Correo electronico"
+          class="w-full h-12 rounded-lg bg-slate-100 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary focus:outline-none px-4">
+
+        <button  type="submit"
+          class="w-32 mx-auto bg-primary hover:bg-[#4dd325] text-black font-bold py-2 rounded-full shadow-md transition-all active:scale-95">
+          ENVIAR
+        </button>
+
+        <!-- Mensaje error -->
+        <p id="errorMsg" class="hidden text-red-500 font-semibold text-sm mt-2">
+          Ingresa un correo válido.
+        </p>
+
+        <!-- Mensaje éxito -->
+        <p id="successMsg" class="hidden text-green-600 font-semibold text-sm mt-2">
+          Código enviado correctamente al correo.
+        </p>
+
+      </form>
+
+      <!-- Mensaje info -->
+      <article class="mt-7 flex items-start gap-3 text-left">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png" class="w-5 h-5 mt-1" alt="icono info">
+
+        <p class="text-slate-500 text-sm leading-snug">
+          Se enviará un código a tu correo electrónico,
+          para cambiar la contraseña.
+        </p>
+
+      </article>
+
+    </section>
+
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="assets/js/contraseña1.js"></script>
+
+</body>
+
+</html> 

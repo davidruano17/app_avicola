@@ -1,0 +1,102 @@
+<div class="space-y-8">
+    <div>
+        <h1 class="text-3xl font-extrabold text-slate-900">Bienvenido, Instructor Líder</h1>
+        <p class="text-slate-500 mt-2">Resumen general de la actividad de la granja y reportes recientes de la jornada.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-slate-500 font-medium text-sm">Usuarios Activos</p>
+                    <h3 class="text-3xl font-bold mt-2">124</h3>
+                </div>
+                <span class="bg-green-100 text-green-600 text-xs font-bold px-2 py-1 rounded-lg">+12%</span>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-slate-500 font-medium text-sm">Reportes Semanales</p>
+                    <h3 class="text-3xl font-bold mt-2">45</h3>
+                </div>
+                <span class="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded-lg">-5%</span>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-slate-500 font-medium text-sm">Alertas de Alimento</p>
+                    <h3 class="text-3xl font-bold mt-2">3</h3>
+                </div>
+                <span class="bg-green-100 text-green-600 text-xs font-bold px-2 py-1 rounded-lg">+1%</span>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-slate-500 font-medium text-sm">Salud del Sistema</p>
+                    <h3 class="text-3xl font-bold mt-2">98%</h3>
+                </div>
+                <span class="bg-slate-100 text-slate-400 text-xs font-bold px-2 py-1 rounded-lg">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+            <div class="p-6 border-b border-slate-50 flex justify-between items-center">
+                <h4 class="font-bold text-slate-800">Reportes Recientes</h4>
+                <button class="text-primary font-bold text-sm">Ver todos</button>
+            </div>
+            <table class="w-full text-left">
+                <thead class="bg-slate-50 text-slate-400 text-[10px] uppercase font-bold">
+                    <tr>
+                        <th class="px-6 py-3">ID</th>
+                        <th class="px-6 py-3">Tipo</th>
+                        <th class="px-6 py-3">Usuario</th>
+                        <th class="px-6 py-3">Fecha</th>
+                        <th class="px-6 py-3">Estado</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm divide-y divide-slate-50">
+                    <tr>
+                        <td class="px-6 py-4 font-bold">#00124</td>
+                        <td class="px-6 py-4">Alimentación</td>
+                        <td class="px-6 py-4 text-slate-500">Juan Perez</td>
+                        <td class="px-6 py-4 text-slate-500">Hace 15m</td>
+                        <td class="px-6 py-4"><span class="bg-green-100 text-green-600 text-[10px] font-bold px-2 py-1 rounded-full uppercase">Completado</span></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-bold">#00123</td>
+                        <td class="px-6 py-4">Mortalidad</td>
+                        <td class="px-6 py-4 text-slate-500">Maria Ruiz</td>
+                        <td class="px-6 py-4 text-slate-500">Hace 1h</td>
+                        <td class="px-6 py-4"><span class="bg-orange-100 text-orange-600 text-[10px] font-bold px-2 py-1 rounded-full uppercase">Pendiente</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <h4 class="font-bold text-slate-800 mb-6">Actividad Reciente</h4>
+            <div class="space-y-6">
+                <div class="flex gap-4">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center shrink-0">
+                        <i data-lucide="user-plus" class="w-4 h-4 text-green-600"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold">Nuevo usuario <span class="font-normal text-slate-500">registrado en el sistema.</span></p>
+                        <p class="text-[10px] text-slate-400 mt-1">Hace 10 minutos</p>
+                    </div>
+                </div>
+                </div>
+            <button class="w-full mt-8 py-3 bg-slate-50 text-slate-600 font-bold text-sm rounded-xl hover:bg-slate-100 transition-colors">
+                Ver bitácora completa
+            </button>
+        </div>
+    </div>
+</div>

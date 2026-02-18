@@ -75,8 +75,10 @@ function limpiarFormulario() {
 }
 
 /* ===== cargar tabla ===== */
-function cargarUsuarios() {
-  let usuarios = obtenerUsuarios();
+function cargarUsuarios(lista = null) {
+
+  let usuarios = lista || obtenerUsuarios();
+
   tablaUsuarios.innerHTML = "";
 
   usuarios.forEach(u => {
@@ -121,8 +123,9 @@ function cargarUsuarios() {
     `;
   });
 
-  actualizarContadores(); 
+  actualizarContadores();
 }
+
 
 /* ===== eliminar ===== */
 function eliminarUsuario(id) {
