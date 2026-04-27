@@ -7,14 +7,11 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Gestión de Usuarios - AVISENA COL</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/gestionUsuarios.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -44,35 +41,29 @@
     </script>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
-    <section class="layout-container flex h-full grow flex-col">
-
-        <header>
-        </header>
-        <main class="flex flex-1 flex-col px-4 md:px-10 lg:px-20 xl:px-40 py-8">
-            <section class="flex flex-wrap justify-between items-end gap-4 mb-8">
-                <section class="flex flex-col gap-1">
-                    <h1 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">Gestión
-                        de Usuarios</h1>
-                    <p class="text-slate-500 dark:text-slate-400 text-base font-normal">Administra el acceso al sistema,
-                        los roles y los datos del personal encargado de las operaciones avícolas</p>
+<body class="main-body">
+    <section class="layout-container">
+        
+        <main class="main-container">
+            <section class="header-container">
+                <section class="header-text">
+                    <h1 class="title">Gestión de Usuarios</h1>
+                    <p class="description">Administra el acceso al sistema, los roles y los datos del personal encargado de las operaciones avícolas</p>
                 </section>
-                <section class="flex flex-col lg:flex-row gap-4 justify-center">
-                    <section class="flex gap-3 flex-wrap">
-                        <button onclick="abrirModal()"
-                            class="flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary text-black text-sm font-bold shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all">
+                <section class="header-actions">
+                    <section class="actions-group">
+                        <button onclick="abrirModal()" class="btn-primary">
                             <span class="material-symbols-outlined">person_add</span>
                             <span>Añadir Usuario</span>
                         </button>
-
                     </section>
                 </section>
             </section>
             <!-- filtrar por numero de documento y rol -->
-            <section class="flex gap-4 mb-6">
-                <section>
-                    <label class="text-sm font-bold">Rol</label>
-                    <select id="filtroRol" class="border rounded px-3 py-2">
+            <section class="filters-container">
+                <section class="filter-group">
+                    <label class="filter-label">Rol</label>
+                    <select id="filtroRol" class="filter-input">
                         <option value="">Todos</option>
                         <option>Instructor lider</option>
                         <option>Instructor investigador</option>
@@ -80,112 +71,102 @@
                     </select>
                 </section>
 
-                <section>
-                    <label class="text-sm font-bold">Documento</label>
-                    <input id="filtroDocumento" type="text" placeholder="Buscar documento"
-                        class="border rounded px-3 py-2" />
+                <section class="filter-group">
+                    <label class="filter-label">Documento</label>
+                    <input id="filtroDocumento" type="text" placeholder="Buscar documento" class="filter-input" />
                 </section>
 
-                <section class="flex items-end">
-                    <button onclick="aplicarFiltros()"
-                        class="flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary text-black text-sm font-bold shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all">
+                <section class="filter-action">
+                    <button onclick="aplicarFiltros()" class="btn-primary">
                         <span class="material-symbols-outlined">filter_list</span>
                         <span>Filtrar</span>
                     </button>
                 </section>
             </section>
 
-            <section
-                class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
-                <section class="overflow-x-auto @container">
-                    <table class="w-full text-left border-collapse">
+            <section class="table-container">
+                <section class="table-wrapper">
+                    <table class="table">
                         <thead>
-                            <tr
-                                class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
-                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Nombre</th>
-                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">E-mail</th>
-                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Teléfono</th>
-                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Número de
-                                    Documento</th>
-                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Rol</th>
-                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Residencia
-                                </th>
-                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold">Fecha de
-                                    ingreso</th>
-                                <th class="px-6 py-4 text-slate-900 dark:text-white text-sm font-semibold text-right">
-                                    Acciones</th>
+                            <tr class="table-header-row">
+                                <th class="table-header">Nombre</th>
+                                <th class="table-header">E-mail</th>
+                                <th class="table-header">Teléfono</th>
+                                <th class="table-header">Número de Documento</th>
+                                <th class="table-header">Rol</th>
+                                <th class="table-header">Residencia</th>
+                                <th class="table-header">Fecha de ingreso</th>
+                                <th class="table-header text-right">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="tablaUsuarios" class="divide-y divide-slate-100 dark:divide-slate-800">
-                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                        <tbody id="tablaUsuarios" class="table-body">
+                            <tr class="table-row">
                         </tbody>
                     </table>
                 </section>
 
             </section>
             <!-- total usuarios -->
-            <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                <section
-                    class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-4">
-                    <section class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                        <span class="material-symbols-outlined text-3xl">groups</span>
+            <section class="grid-container">
+                <section class="card">
+                    <section class="icon-container">
+                        <span class="icon">groups</span>
                     </section>
                     <section>
-                        <p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Total
-                            Usuarios</p>
-                        <h3 id="totalUsuarios" class="text-2xl font-black text-slate-900 dark:text-white">0</h3>
+                        <p class="card-label">Total Usuarios</p>
+                        <h3 id="totalUsuarios" class="card-value">0</h3>
                     </section>
                 </section>
-                <section
-                    class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-4">
-                    <section class="size-12 rounded-full bg-success/10 flex items-center justify-center text-success">
-                        <span class="material-symbols-outlined text-3xl">person_check</span>
+                <section class="card">
+                    <section class="icon-container success">
+                        <span class="icon">person_check</span>
                     </section>
                     <section>
-                        <p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
-                            Usuarios Activos</p>
-                        <h3 id="usuariosActivos" class="text-2xl font-black text-slate-900 dark:text-white">0</h3>
+                        <p class="card-label">Usuarios Activos</p>
+                        <h3 id="usuariosActivos" class="card-value">0</h3>
                     </section>
                 </section>
-                <section
-                    class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-4">
-                    <section class="size-12 rounded-full bg-warning/10 flex items-center justify-center text-warning">
-                        <span class="material-symbols-outlined text-3xl">person_off</span>
+                <section class="card">
+                    <section class="icon-container warning">
+                        <span class="icon">person_off</span>
                     </section>
                     <section>
-                        <p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
-                            Usuarios Inhabilitados</p>
-                        <h3 id="usuariosInactivos" class="text-2xl font-black text-slate-900 dark:text-white">0</h3>
+                        <p class="card-label">Usuarios Inhabilitados</p>
+                        <h3 id="usuariosInactivos" class="card-value">0</h3>
                     </section>
                 </section>
             </section>
         </main>
-        <footer class="mt-auto px-10 py-6 text-center border-t border-slate-200 dark:border-slate-800">
-            <p class="text-slate-400 dark:text-slate-500 text-xs">© 2025 AVISENA COL</p>
+        <footer class="footer">
+            <p class="footer-text">© 2026 AVISENA COL</p>
         </footer>
     </section>
 
     <!-- modal para añadir usuario -->
-    <section id="modalUsuario" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+    <section id="modalUsuario" class="modal">
 
-        <section class="bg-white dark:bg-slate-900 rounded-xl w-full max-w-xl p-6">
+        <section class="modal-content">
 
-            <section class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">Añadir Usuario</h3>
-                <button onclick="cerrarModal()" class="text-xl text-slate-400 hover:text-danger">
-                    &times;
-                </button>
+            <section class="modal-header">
+                <h3 class="modal-title">Añadir Usuario</h3>
+                <button onclick="cerrarModal()" class="modal-close">&times;</button>
             </section>
 
-            <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input id="nombre" placeholder="Nombre" class="rounded-lg border p-2">
-                <input id="email" placeholder="E-mail" class="rounded-lg border p-2">
-                <input id="telefono" placeholder="Teléfono" class="rounded-lg border p-2">
-                <input id="documento" placeholder="Documento" class="rounded-lg border p-2">
-                <input id="residencia" placeholder="Residencia" class="rounded-lg border p-2">
-                <input id="fecha" type="date" class="rounded-lg border p-2">
+            <section class="modal-form">
+                <label class="form-label">Nombre</label>
+                <input id="nombre" placeholder="Nombre" class="form-input">
+                <label class="form-label">E-mail</label>
+                <input id="email" placeholder="E-mail" class="form-input">
+                <label class="form-label">Teléfono</label>
+                <input id="telefono" placeholder="Teléfono" class="form-input">
+                <label class="form-label">Documento</label>
+                <input id="documento" placeholder="Documento" class="form-input">
+                <label class="form-label">Residencia</label>
+                <input id="residencia" placeholder="Residencia" class="form-input">
+                <label class="form-label">Fecha de ingreso</label>
+                <input id="fecha" type="date" class="form-input">
 
-                <select id="rol" class="rounded-lg border p-2 col-span-2">
+                <select id="rol" class="form-input full">
                     <option value="">Seleccione rol</option>
                     <option>Instructor lider</option>
                     <option>Instructor investigador</option>
@@ -193,14 +174,9 @@
                 </select>
             </section>
 
-            <section class="flex justify-end gap-3 mt-6">
-                <button onclick="cerrarModal()" class="px-4 py-2 rounded-lg bg-slate-200">
-                    Cancelar
-                </button>
-
-                <button onclick="guardarUsuario()" class="px-4 py-2 rounded-lg bg-primary font-bold">
-                    Guardar
-                </button>
+            <section class="modal-actions">
+                <button onclick="cerrarModal()" class="btn cancel">Cancelar</button>
+                <button onclick="guardarUsuario()" class="btn-primary">Guardar</button>
             </section>
 
         </section>
