@@ -23,7 +23,6 @@
     padding: 2rem 1rem;           /* py-8 (2rem arriba/abajo) + px-4 (1rem lados) */
 }
 
-
 .header-container {         /* contenedor principal */
     display: flex;
     flex-wrap: wrap;
