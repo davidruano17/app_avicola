@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avisena Col - Registro de Clasificación</title>
+    <link rel="stylesheet" href="assets/css/clasificacion.css" />
+</head>
+<body>
+
+    <header>
+        
+    </header>
+
+    <main class="container">
+        <header class="doc-title-section">
+            <hgroup class="title-text">
+                <h1>SENA - UNIDAD AVÍCOLA</h1>
+                <p>REGISTRO DE CLASIFICACIÓN DE HUEVOS</p>
+            </hgroup>
+            <mark class="status-pill no-print">SISTEMA LISTO</mark>
+        </header>
+
+        <header class="traceability-header no-print">
+            <h2><span class="hash">#</span> TRAZABILIDAD</h2>
+            <button type="button" id="btn-historial-abrir" class="btn-history">HISTORIAL COMPLETO</button>
+        </header>
+
+        <form id="form-registro">
+            <fieldset class="card info-grid">
+                <label class="input-group">
+                    <span>MES:</span>
+                    <input type="month" required id="input-mes">
+                </label>
+                <section class="input-group">
+                    <span>SEMANA DEL / AL:</span>
+                    <label class="date-inputs">
+                        <input type="date" required id="fecha-inicio">
+                        <b class="slash">/</b>
+                        <input type="date" required id="fecha-fin">
+                    </label>
+                </section>
+                <label class="input-group">
+                    <span>CONSECUTIVO:</span>
+                    <input type="text" class="bold-center" id="input-cons" placeholder="001">
+                </label>
+                <label class="input-group">
+                    <span>N° GALPÓN:</span>
+                    <input type="number" placeholder="0" id="input-galpon">
+                </label>
+                <label class="input-group">
+                    <span>LÍNEA GENÉTICA:</span>
+                    <select id="linea-genetica">
+                        <option selected disabled>Seleccione línea</option>
+                        <option>Hy-Line</option>
+                        <option>Isa Brown</option>
+                    </select>
+                </label>
+                <label class="input-group">
+                    <span>RESPONSABLE:</span>
+                    <input type="text" placeholder="Aprendiz" id="input-responsable">
+                </label>
+            </fieldset>
+
+            <section class="card table-wrapper">
+                <table class="main-table">
+                    <thead>
+                        <tr>
+                            <th class="al-left">TIPO DE HUEVO</th>
+                            <th>ACTUAL (HOY)</th>
+                            <th>ANTERIOR</th>
+                            <th class="col-highlight">ACUMULADO</th>
+                            <th>PRECIO ($)</th>
+                            <th>SUBTOTAL ($)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body">
+                        <tr><td class="al-left type-name">Tipo C</td><td><input type="number" class="table-input" value="0"></td><td><input type="number" class="table-input" value="0"></td><td class="col-highlight">0</td><td><input type="text" class="table-input" placeholder="0"></td><td class="subtotal-cell">$ 0</td></tr>
+                        <tr><td class="al-left type-name">Tipo B</td><td><input type="number" class="table-input" value="0"></td><td><input type="number" class="table-input" value="0"></td><td class="col-highlight">0</td><td><input type="text" class="table-input" placeholder="0"></td><td class="subtotal-cell">$ 0</td></tr>
+                        <tr><td class="al-left type-name">Tipo AAA</td><td><input type="number" class="table-input" value="0"></td><td><input type="number" class="table-input" value="0"></td><td class="col-highlight">0</td><td><input type="text" class="table-input" placeholder="0"></td><td class="subtotal-cell">$ 0</td></tr>
+                        <tr><td class="al-left type-name">Tipo AA</td><td><input type="number" class="table-input" value="0"></td><td><input type="number" class="table-input" value="0"></td><td class="col-highlight">0</td><td><input type="text" class="table-input" placeholder="0"></td><td class="subtotal-cell">$ 0</td></tr>
+                        <tr><td class="al-left type-name">Tipo A</td><td><input type="number" class="table-input" value="0"></td><td><input type="number" class="table-input" value="0"></td><td class="col-highlight">0</td><td><input type="text" class="table-input" placeholder="0"></td><td class="subtotal-cell">$ 0</td></tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-footer">
+                            <td class="al-left footer-label">TOTAL PANALES</td>
+                            <td class="footer-val">0</td>
+                            <td class="footer-val">0</td>
+                            <td class="footer-val highlight">0</td>
+                            <td class="al-right footer-desc">VALOR TOTAL:</td>
+                            <td class="grand-total-cell">$ 0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
+
+            <fieldset class="card footer-details">
+                <label class="input-group full-width">
+                    <span class="label-title"> DESCRIPCIÓN:</span>
+                    <textarea id="observaciones" placeholder="Escriba aquí novedades..." rows="4"></textarea>
+                </label>
+
+                <div class="divider-line"></div>
+
+                <section class="signature-container">
+                    <label class="sig-box">
+                        <span class="label-sig">ENTREGA </span>
+                        <input type="text" placeholder="Nombre completo" id="firma-entrega">
+                    </label>
+                    <label class="sig-box">
+                        <span class="label-sig text-right">RECIBE INSTRUCTORA </span>
+                        <input type="text" placeholder="Nombre completo" id="firma-recibe" class="text-right">
+                    </label>
+                </section>
+            </fieldset>
+
+            <footer class="action-footer no-print">
+                <button type="button" class="btn-danger" id="btn-borrar">❌ BORRAR REGISTRO</button>
+                <nav class="btn-group">
+                    <button type="button" class="btn-action btn-excel" id="btn-excel">EXPORTAR EXCEL</button>
+                    <button type="button" class="btn-action btn-black" id="btn-pdf">EXPORTAR PDF</button>
+                    <button type="submit" class="btn-action btn-submit">GUARDAR REGISTRO</button>
+                </nav>
+            </footer>
+        </form>
+    </main>
+
+    <dialog id="modal-historial" class="modal-fullscreen no-print">
+        <article class="modal-content-wrapper">
+            <header class="modal-header-custom">
+                <h2 class="modal-title-big">HISTORIAL DE<br>REGISTROS</h2>
+                <button type="button" class="btn-close-x" onclick="this.closest('dialog').close()">&times;</button>
+            </header>
+            <section id="lista-historial" class="history-scroll-area"></section>
+        </article>
+    </dialog>
+
+    <dialog id="modal-exito" class="modal-custom no-print">
+        <article>
+            <span class="icon-success">✔</span>
+            <h2>¡REGISTRO EXITOSO!</h2>
+            <p>Los datos se han guardado correctamente.</p>
+            <button type="button" id="btn-exito-continuar" class="btn-green">CONTINUAR</button>
+        </article>
+    </dialog>
+
+    <dialog id="modal-confirmar-borrar" class="modal-custom no-print">
+        <article>
+            <span class="icon-delete">🗑</span>
+            <h2>¿BORRAR TODO?</h2>
+            <div class="modal-actions">
+                <button type="button" id="btn-cancelar" class="btn-gray">CANCELAR</button>
+                <button type="button" id="btn-si-borrar" class="btn-red">SÍ, BORRAR</button>
+            </div>
+        </article>
+    </dialog>
+
+    <script src="assets/js/clasificacion.js"></script>
+</body>
+</html> 
