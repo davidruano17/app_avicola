@@ -1,0 +1,31 @@
+:root {
+    --primary: #5be830;
+    --bg-color: #f6f8f6;
+    --text: #111b0e;
+}
+
+body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg-color); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; }
+
+.top-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: white; border-bottom: 1px solid #eaf3e7; }
+.logo-area { display: flex; align-items: center; gap: 15px; }
+.logo-area img { width: 45px; }
+
+.login-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.login-card { background: white; width: 100%; max-width: 450px; padding: 40px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border: 1px solid #eaf3e7; text-align: center; }
+
+.card-header h1 { font-size: 2rem; margin-bottom: 10px; }
+.field { text-align: left; margin-bottom: 20px; position: relative; }
+.field label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; }
+.field input { width: 100%; padding: 12px; border: 1px solid #d5e7d0; border-radius: 8px; box-sizing: border-box; }
+
+.btn-primary { display: block; background: var(--primary); color: black; font-weight: 900; padding: 15px; border-radius: 10px; text-decoration: none; margin-top: 10px; }
+
+.separator { margin: 20px 0; color: #ccc; font-size: 0.8rem; }
+
+.social-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.btn-social { padding: 10px; border: 1px solid #d5e7d0; background: white; border-radius: 10px; cursor: pointer; font-weight: 600; }
+
+.card-footer { margin-top: 25px; }
+.card-footer a { color: var(--primary); font-weight: 900; text-decoration: none; }
+
+.main-footer { text-align: center; padding: 20px; font-size: 0.8rem; color: #999; }

@@ -1,0 +1,106 @@
+:root {
+    --primary: #22c55e;
+    --primary-hover: #16a34a;
+    --text-dark: #043224;
+    --bg-gray: #f3f4f6;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-gray);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+/* Header */
+.header-brand {
+    position: fixed;
+    top: 1.5rem;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10;
+}
+
+.logo-sena { width: 3.5rem; height: 3.5rem; object-fit: contain; }
+
+.title-brand {
+    color: var(--text-dark);
+    font-weight: 800;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+/* Main Card */
+.main-card {
+    background: var(--white);
+    width: 100%;
+    max-width: 448px;
+    border-radius: 1rem;
+    padding: 4rem 2.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.title-reset { color: #000; font-size: 2.25rem; font-weight: 800; line-height: 1.2; margin: 0; }
+
+/* Form */
+.form-container { margin-top: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+.input-pass {
+    width: 100%;
+    text-align: center;
+    font-size: 1.125rem;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: none;
+    background: var(--bg-gray);
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input-pass:focus { outline: 2px solid #86efac; }
+
+.btn-confirm {
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+    padding: 1rem;
+    font-size: 1.125rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-confirm:hover { background: var(--primary-hover); transform: scale(1.05); }
+
+/* Botón Salir */
+.btn-salir {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+    padding: 0.75rem 2.5rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    transition: all 0.3s;
+}
+
+.btn-salir:hover { background: var(--primary-hover); }

@@ -23,6 +23,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#49e619",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#152111",
+                    },
+                    fontFamily: { display: ["Inter", "sans-serif"] },
+                },
+            },
+        }
 // Función para mostrar/ocultar contraseña
 function togglePassword() {
   const passInput = document.getElementById('password');
