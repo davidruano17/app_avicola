@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Registro de Morbilidad y Tratamientos</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6aec13",
+                        "background-light": "#f7f8f6",
+                        "background-dark": "#172210",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a2a14;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #6aec1355;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6aec13;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 min-h-screen">
+    <!-- Navigation Bar -->
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header & Top Alerts -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <section class="lg:col-span-2">
+                <h2 class="text-3xl font-bold mb-2">Registro de Tratamientos</h2>
+                <p class="text-slate-500 dark:text-slate-400">Gestión de sanidad animal
+                    médicos.</p>
+            </section>
+            
+        </section>
+        <section class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+            <aside class="xl:col-span-4 space-y-6">
+                <section
+                    class="bg-white dark:bg-background-dark/40 border border-slate-200 dark:border-primary/10 rounded-xl p-6 shadow-xl">
+                    <section class="flex items-center gap-2 mb-6">
+                        <span class="material-icons text-primary">add_circle_outline</span>
+                        <h3 class="text-lg font-semibold">Nuevo Tratamiento</h3>
+                    </section>
+                    <form class="space-y-4">
+                        <section>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Fecha de
+                                Tratamiento</label>
+                            <input
+                                class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white transition-all"
+                                type="date" />
+                        </section>
+                        <section>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Lote / Ave</label>
+                            <select
+                                class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white">
+                                <option>Seleccione Galpon...</option>
+                                <option>Galpon 1 </option>
+                                <option>Galpon 2</option>
+                                <option>Galpon 3</option>
+                                <option>Galpon 4</option>
+                            </select>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Lote / Ave</label>
+                            <select
+                                class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white">
+                                <option>Seleccione Lote...</option>
+                                <option>Lote 1 </option>
+                                <option>Lote 2 </option>
+                                <option>Lote 3 </option>
+                                <option>Lote 4 </option>
+                            </select>
+                        </section>
+                        
+                        <section class="grid grid-cols-2 gap-4">
+                            <section>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Cantidad
+                                    Aplicada</label>
+                                <input
+                                    class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white"
+                                    placeholder="0.00" type="number" />
+                            </section>
+                            <section>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Unidad</label>
+                                <select
+                                    class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white text-sm">
+                                    <option>ml</option>
+                                    <option>gr</option>
+                                    <option>dosis</option>
+                                </select>
+                            </section>
+                        </section>
+                        <section>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Personal
+                                Responsable</label>
+                            <input
+                                class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white"
+                                placeholder="Nombre del técnico" type="text" />
+                        </section>
+                        <section>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Reacciones
+                                Observadas</label>
+                            <textarea
+                                class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white"
+                                placeholder="Describa síntomas o efectos secundarios..." rows="3"></textarea>
+                        </section>
+                        <button
+                            class="w-full bg-primary hover:bg-primary/80 text-background-dark font-bold py-3 rounded-lg transition-all flex justify-center items-center gap-2"
+                            type="submit">
+                            <span class="material-icons text-sm">save</span>
+                            Registrar Tratamiento
+                        </button>
+                    </form>
+                </section>
+                
+            </aside>
+            <!-- Main Content: Timeline and Historical Table -->
+            <article class="xl:col-span-8 space-y-8">
+                <!-- Historical Table -->
+                <section
+                    class="bg-white dark:bg-background-dark/40 border border-slate-200 dark:border-primary/10 rounded-xl shadow-xl overflow-hidden">
+                    <article
+                        class="p-6 border-b border-slate-200 dark:border-primary/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <article class="flex items-center gap-2">
+                            <span class="material-icons text-primary">history</span>
+                            <h3 class="text-lg font-semibold">Historial de Tratamientos</h3>
+                        </article>
+                        <div class="flex gap-3">
+                            <article class="relative">
+                                <input
+                                    class="bg-slate-100 dark:bg-background-dark border-none rounded-lg text-sm pl-9 py-2 focus:ring-1 focus:ring-primary w-48"
+                                    placeholder="Filtrar..." type="text" />
+                                <span
+                                    class="material-icons absolute left-2.5 top-2 text-slate-400 text-lg">filter_list</span>
+                            </article>
+                            <button
+                                class="bg-primary/10 hover:bg-primary/20 text-primary p-2 rounded-lg transition-colors">
+                                <span class="material-icons text-sm">file_download</span>
+                            </button>
+                    </article>
+                    
+                    <article
+                        class="px-6 py-4 bg-slate-50 dark:bg-background-dark/20 flex justify-between items-center text-xs text-slate-500">
+                        <span>Registros</span>
+                        <article class="flex gap-2">
+                            <button
+                                class="px-3 py-1 bg-background-dark border border-primary/20 rounded hover:bg-primary/10 transition-colors">Anterior</button>
+                            <button class="px-3 py-1 bg-primary text-background-dark font-bold rounded">1</button>
+                            <button
+                                class="px-3 py-1 bg-background-dark border border-primary/20 rounded hover:bg-primary/10 transition-colors">Siguiente</button>
+                        </article>
+                    </article>
+                </section>
+            </article>
+        </article>
+    </main>
+    
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 /* Paleta de colores Dashboard */
 :root {
-    --primary: #10b981;    /* Emerald 500 */
-    --primary-hover: #059669;
+    --primary: #39FF14;    /* Emerald 500 */
+    --primary-hover: #39FF14;
     --slate-50: #f8fafc;
     --slate-100: #f1f5f9;
     --slate-200: #e2e8f0;
@@ -105,4 +105,7 @@ body {
 .table-cell {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--slate-50);
+}
+.align-button {
+    justify-content: space-between;
 }
