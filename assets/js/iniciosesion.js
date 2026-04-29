@@ -1,74 +1,69 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("loginForm");
-  const email = document.getElementById("email");
-  const password = document.getElementById("password");
-  const errorBox = document.getElementById("errorBox");
+    const form = document.getElementById("loginForm");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const errorBox = document.getElementById("errorBox");
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault(); // Evita que la página se recargue
+    // 1. Definición de usuarios y sus dashboards
+    const usuarios = [
+        { correo: "admin", clave: "12345", url: "menucolapsable.html" },
+        { correo: "aprendiz", clave: "1234", url: "aprendiz.html" },
+        { correo: "investigador", clave: "1234", url: "investigador.html" }
+    ];
 
-    const correoCorrecto = "admin@gmail.com";
-    const claveCorrecta = "12345";
+    if (form) {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
 
-    if (email.value === correoCorrecto && password.value === claveCorrecta) {
-      errorBox.classList.add("hidden");
-      alert("Inicio de sesión exitoso ✅");
+            // Limpieza de espacios para evitar errores de escritura
+            const inputUser = email.value.trim();
+            const inputPass = password.value.trim();
 
-      // Redirigir al perfil del administrador
-      window.location.href = "perfil admin.html";
-    } else {
-      // Mostrar mensaje de error si fallan los datos
-      errorBox.classList.remove("hidden");
+            const usuarioEncontrado = usuarios.find(u => u.correo === inputUser && u.clave === inputPass);
+
+            if (usuarioEncontrado) {
+                if (errorBox) errorBox.classList.add("hidden");
+                
+                // Guardamos en localStorage para usarlo en los Dashboards
+                localStorage.setItem('userRole', usuarioEncontrado.correo);
+                
+                // Redirección
+                window.location.href = usuarioEncontrado.url;
+            } else {
+                if (errorBox) errorBox.classList.remove("hidden");
+                // Opcional: limpiar el campo de contraseña si falla
+                password.value = "";
+            }
+        });
     }
-  });
 });
 
-// Función para mostrar/ocultar contraseña
+// --- Función para mostrar/ocultar contraseña ---
 function togglePassword() {
-  const passInput = document.getElementById('password');
-  passInput.type = passInput.type === 'password' ? 'text' : 'password';
-}
-const btnGoogle = document.getElementById('btnGoogle');
-
-btnGoogle.addEventListener('click', () => {
-  const client = google.accounts.oauth2.initCodeClient({
-    client_id: 'TU_CLIENT_ID_DE_GOOGLE.apps.googleusercontent.com',
-    scope: 'email profile',
-    ux_mode: 'popup',
-    callback: (response) => {
-      console.log("Respuesta de Google:", response);
-      // Aquí enviarías el código a tu backend o redirigirías
-      window.location.href = "perfil admin.html";
-    },
-  });
-  client.requestCode();
-});
-// 1. Inicialización automática al cargar la página
-window.fbAsyncInit = function () {
-  FB.init({
-    appId: 'TU_APP_ID_AQUÍ', // Sustituye por tu ID de Meta for Developers
-    cookie: true,
-    xfbml: true,
-    version: 'v18.0'
-  });
-};
-
-// 2. Vincular el botón que ya tienes en tu HTML
-const btnFacebook = document.getElementById('btnFacebook');
-
-btnFacebook.addEventListener('click', () => {
-  // Abrir el diálogo de login de Facebook
-  FB.login(function (response) {
-    if (response.status === 'connected') {
-      // Si la conexión es exitosa, obtenemos los datos
-      FB.api('/me', { fields: 'name,email' }, function (userData) {
-        console.log("Bienvenido: " + userData.name);
-
-        // Redirección directa a tu página de perfil admin
-        window.location.href = "perfil admin.html";
-      });
-    } else {
-      console.log('El usuario no autorizó el acceso.');
+    const passInput = document.getElementById('password');
+    if (passInput) {
+        passInput.type = passInput.type === 'password' ? 'text' : 'password';
     }
-  }, { scope: 'public_profile,email' });
-});
+}
+
+// --- Lógica de Google (Asegúrate de tener la librería cargada en el HTML) ---
+const btnGoogle = document.getElementById('btnGoogle');
+if (btnGoogle) {
+    btnGoogle.addEventListener('click', () => {
+        // Validación preventiva: solo funcionará si pones un Client ID real
+        if (typeof google !== 'undefined') {
+            const client = google.accounts.oauth2.initCodeClient({
+                client_id: 'TU_CLIENT_ID_REAL.apps.googleusercontent.com',
+                scope: 'email profile',
+                ux_mode: 'popup',
+                callback: (response) => {
+                    // Por defecto, mandamos al aprendiz o un visor genérico
+                    window.location.href = "aprendiz.html"; 
+                },
+            });
+            client.requestCode();
+        } else {
+            console.error("Librería de Google no cargada");
+        }
+    });
+}

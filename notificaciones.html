@@ -1,165 +1,118 @@
 <!DOCTYPE html>
-<html class="light" lang="es">
+<html lang="es">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Centro de Notificaciones - PoultryFarm Manager</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#5be830",
-                        "background-light": "#f6f8f6",
-                        "background-dark": "#152111",
-                    },
-                    fontFamily: { "display": ["Inter"] }
-                },
-            },
-        }
-    </script>
-    <style>
-        .unread-row { background-color: #f0f7ff; border-left: 4px solid #3b82f6; transition: all 0.2s; }
-        .dark .unread-row { background-color: #1e293b; border-left-color: #5be830; }
-        tr.read { opacity: 0.8; border-left: 4px solid transparent; }
-        .tab-active { border-bottom: 3px solid #5be830; color: #111b0e; }
-    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Centro de Notificaciones - Avisena Col</title>
+    <link rel="stylesheet" href="assets/css/notificaciones.css" />
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-[#111b0e] dark:text-[#eaf3e7] min-h-screen">
 
-    <header >
-    </header>
+<body class="light-mode">
 
-    <main class="max-w-[1200px] mx-auto px-4 py-8">
-        <section class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+    <main class="container">
+        <section class="main-header" style="display: flex; justify-content: space-between; align-items: center;">
             <header>
-                <h1 class="text-3xl font-black tracking-tight dark:text-white">Centro de Notificaciones</h1>
-                <p class="text-[#5f974e] dark:text-primary/70 text-sm mt-1">Sincronizado en tiempo real con Galpones A-1 al B-4.</p>
+                <h1>Centro de Notificaciones</h1>
+                <p class="subtitle">Sincronizado en tiempo real con Galpones A-1 al B-4.</p>
             </header>
-            <nav class="flex gap-3">
-                <button id="mark-all-read" class="flex items-center gap-2 px-4 py-2 bg-[#eaf3e7] dark:bg-[#2d3a28] rounded-lg text-sm font-bold hover:bg-primary hover:text-white transition-all">
-                    <span class="material-symbols-outlined text-sm">done_all</span> Marcar todo como leído
+            <nav class="header-actions">
+                <button id="mark-all-read" class="btn btn-secondary">
+                    Marcar todo como leído
                 </button>
-                <button onclick="location.reload()" class="p-2 bg-[#eaf3e7] dark:bg-[#2d3a28] rounded-lg hover:bg-primary/10" aria-label="Actualizar">
-                    <span class="material-symbols-outlined">refresh</span>
+                <button id="refresh-btn" class="btn btn-icon">
+                    <span>↻</span>
                 </button>
+               
             </nav>
         </section>
 
-        <nav class="mb-6 border-b border-[#d5e7d0] dark:border-[#2d3a28]">
-            <ul class="flex gap-8" id="filter-tabs">
-                <li>
-                    <button data-filter="all" class="flex items-center gap-2 pb-3 text-sm font-bold tab-active">
-                        Todas <span class="bg-slate-100 dark:bg-[#2d3a28] px-2 py-0.5 rounded text-xs">5</span>
-                    </button>
-                </li>
-                <li>
-                    <button data-filter="unread" class="flex items-center gap-2 pb-3 text-sm font-bold text-[#5f974e] hover:text-primary transition-colors">
-                        No leídas <span class="bg-primary/20 text-primary-dark px-2 py-0.5 rounded text-xs">2</span>
-                    </button>
-                </li>
-                <li>
-                    <button data-filter="critical" class="flex items-center gap-2 pb-3 text-sm font-bold text-[#5f974e] hover:text-red-500 transition-colors">
-                        Críticas <span class="bg-red-100 text-red-600 px-2 py-0.5 rounded text-xs">2</span>
-                    </button>
-                </li>
+        <nav class="tabs-container">
+            <ul class="tabs" id="filter-tabs">
+                <li><button data-filter="all" class="tab-btn active">Todas <span class="badge">4</span></button></li>
+                <li><button data-filter="unread" class="tab-btn">No leídas <span class="badge badge-unread">2</span></button></li>
+                <li><button data-filter="critical" class="tab-btn">Críticas <span class="badge badge-critical">2</span></button></li>
             </ul>
         </nav>
 
-        <section class="bg-white dark:bg-[#1c2a17] rounded-xl border border-[#d5e7d0] dark:border-[#2d3a28] shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left" id="notification-table">
-                    <thead class="bg-background-light dark:bg-[#152111] text-xs font-bold uppercase tracking-wider border-b border-[#d5e7d0] dark:border-[#2d3a28]">
-                        <tr>
-                            <th scope="col" class="px-6 py-4 w-16 text-center">Tipo</th>
-                            <th scope="col" class="px-6 py-4">Detalles del Suceso</th>
-                            <th scope="col" class="px-6 py-4 w-40 text-center">Fecha/Hora</th>
-                            <th scope="col" class="px-6 py-4 w-32 text-right">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-[#d5e7d0] dark:divide-[#2d3a28]">
-                        <tr class="unread-row" data-type="critical" data-status="unread">
-                            <td class="px-6 py-4 text-center">
-                                <span class="material-symbols-outlined p-2 rounded-full bg-red-100 text-red-600">warning</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <article>
-                                    <h3 class="text-red-600 font-black text-base">Alta Mortalidad: Galpón 4</h3>
-                                    <p class="text-[#5f974e] dark:text-primary/60 text-sm">El índice ha superado el umbral del 2% en las últimas 4 horas.</p>
-                                </article>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-center">Hace 5 min</td>
-                            <td class="px-6 py-4 text-right">
-                                <button onclick="markAsRead(this)" class="bg-primary text-[#111b0e] px-4 py-1.5 rounded-lg text-sm font-bold shadow hover:scale-105 transition-transform">Ver</button>
-                            </td>
-                        </tr>
+        <section class="table-card" style="overflow-x: auto;">
+            <table id="notification-table" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Detalles del Suceso</th>
+                        <th>Fecha/Hora</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="notification-row unread" data-type="critical">
+                        <td class="icon-col" style="text-align: center; padding: 10px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="background-color: #fee2e2; border-radius: 50%; padding: 8px; color: #dc2626;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        </td>
+                        <td class="notif-content">
+                            <h3 class="text-critical" style="font-weight: bold; margin: 0;">Alta Mortalidad: Galpón 4</h3>
+                            <p style="margin: 0;">El índice ha superado el umbral del 2%.</p>
+                        </td>
+                        <td class="time-col">Hace 5 min</td>
+                        <td class="action-col">
+                            <button class="btn-action" style="background-color: var(--primary); color: #000; border-radius: 12px; padding: 8px 24px; border: none; font-weight: 800; cursor: pointer;">Ver</button>
+                        </td>
+                    </tr>
 
-                        <tr class="read" data-type="production" data-status="read">
-                            <td class="px-6 py-4 text-center">
-                                <span class="material-symbols-outlined p-2 rounded-full bg-primary/20 text-primary">trending_up</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <article>
-                                    <h3 class="font-semibold text-base">Producción: Incremento del 5%</h3>
-                                    <p class="text-[#5f974e] dark:text-primary/60 text-sm">Recolección optimizada en Lote 2024-B.</p>
-                                </article>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-center">Hace 12 min</td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="text-primary font-bold text-sm hover:underline">Detalles</button>
-                            </td>
-                        </tr>
+                    <tr class="notification-row read" data-type="production">
+                        <td class="icon-col" style="text-align: center; padding: 10px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="background-color: #dcfce7; border-radius: 50%; padding: 8px; color: #16a34a;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        </td>
+                        <td class="notif-content">
+                            <h3 style="margin: 0;">Producción: Incremento del 5%</h3>
+                            <p style="margin: 0;">Recolección optimizada en Lote 2024-B.</p>
+                        </td>
+                        <td class="time-col">Hace 12 min</td>
+                        <td class="action-col">
+                            <button class="btn-action" style="background-color: var(--primary); color: #000; border-radius: 12px; padding: 8px 24px; border: none; font-weight: 800; cursor: pointer;">Ver</button>
+                        </td>
+                    </tr>
 
-                        <tr class="unread-row" data-type="operational" data-status="unread">
-                            <td class="px-6 py-4 text-center">
-                                <span class="material-symbols-outlined p-2 rounded-full bg-orange-100 text-orange-600">inventory_2</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <article>
-                                    <h3 class="font-bold text-base">Silo A: Nivel Bajo (15%)</h3>
-                                    <p class="text-[#5f974e] dark:text-primary/60 text-sm">Se requiere pedido de reposición inmediato.</p>
-                                </article>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-center">Hace 1 hora</td>
-                            <td class="px-6 py-4 text-right">
-                                <button onclick="markAsRead(this)" class="bg-primary text-[#111b0e] px-4 py-1.5 rounded-lg text-sm font-bold shadow hover:scale-105">Ver</button>
-                            </td>
-                        </tr>
+                    <tr class="notification-row unread" data-type="operational">
+                        <td class="icon-col" style="text-align: center; padding: 10px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="background-color: #fef3c7; border-radius: 50%; padding: 8px; color: #d97706;"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" y1="22" x2="12" y2="12"></line></svg>
+                        </td>
+                        <td class="notif-content">
+                            <h3 style="margin: 0;">Silo A: Nivel Bajo (15%)</h3>
+                            <p style="margin: 0;">Se requiere pedido de reposición inmediato.</p>
+                        </td>
+                        <td class="time-col">Hace 1 hora</td>
+                        <td class="action-col">
+                            <button class="btn-action" style="background-color: var(--primary); color: #000; border-radius: 12px; padding: 8px 24px; border: none; font-weight: 800; cursor: pointer;">Ver</button>
+                        </td>
+                    </tr>
 
-                        <tr class="read" data-type="critical" data-status="read">
-                            <td class="px-6 py-4 text-center">
-                                <span class="material-symbols-outlined p-2 rounded-full bg-red-100 text-red-600">device_thermostat</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <article>
-                                    <h3 class="font-semibold text-base">Temp Crítica: Galpón 2 (32°C)</h3>
-                                    <p class="text-[#5f974e] dark:text-primary/60 text-sm">Extractores activados automáticamente.</p>
-                                </article>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-center">Hace 5 horas</td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="text-primary font-bold text-sm hover:underline">Detalles</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <tr class="notification-row read" data-type="critical">
+                        <td class="icon-col" style="text-align: center; padding: 10px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="background-color: #fee2e2; border-radius: 50%; padding: 8px; color: #dc2626;"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"></path><line x1="10" y1="9" x2="14" y2="9"></line></svg>
+                        </td>
+                        <td class="notif-content">
+                            <h3 style="font-weight: bold; margin: 0;">Temp Crítica: Galpón 2 (32°C)</h3>
+                            <p style="margin: 0;">Extractores activados automáticamente.</p>
+                        </td>
+                        <td class="time-col">Hace 5 horas</td>
+                        <td class="action-col">
+                            <button class="btn-action" style="background-color: var(--primary); color: #000; border-radius: 12px; padding: 8px 24px; border: none; font-weight: 800; cursor: pointer;">Ver</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
-        <footer class="mt-8 flex justify-between items-center text-[#5f974e] dark:text-primary/50 text-xs">
-            <div class="flex items-center gap-2">
-                <span class="size-2 rounded-full bg-primary animate-pulse"></span>
-                Servidor activo: Galpones en línea
-            </div>
-            <p>AVISENA COL v2.4.0 © 2025</p>
+        <footer class="main-footer" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;">
+            <span class="status">
+                <span class="dot" style="display: inline-block; width: 8px; height: 8px; background: #22c55e; border-radius: 50%; margin-right: 5px;"></span> Servidor activo
+            </span>
+            <p style="margin: 0;">AVISENA COL v2.4.0 © 2026</p>
         </footer>
     </main>
 
-    
- <script src="assets/js/notificaciones.js"></script>
+    <script src="assets/js/notificaciones.js"></script>
 </body>
 </html>

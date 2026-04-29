@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Registro de Morbilidad - Sena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/morbilidad.css">
+</head>
+
+<body>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <section class="lg:col-span-2">
+                <h2 class="text-3xl font-bold mb-2">Registro de Morbilidad y Causas</h2>
+                <p class="text-slate-500 dark:text-slate-400">Control y seguimiento de síntomas en aves.</p>
+            </section>
+        </section>
+        <section class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+            <aside class="xl:col-span-4 space-y-6">
+                <section
+                    class="bg-white dark:bg-background-dark/40 border border-slate-200 dark:border-primary/10 rounded-xl p-6 shadow-xl">
+                    <section class="flex items-center gap-2 mb-6">
+                        <span class="material-icons text-primary">assignment_add</span>
+                        <h3 class="text-lg font-semibold">Nuevo Registro de Morbilidad</h3>
+                    </section>
+                    <form class="space-y-4">
+                        <section class="bg-primary/5 p-3 rounded-lg border border-primary/10">
+                            <label class="block text-xs font-bold uppercase text-primary mb-1">Personal
+                                Responsable</label>
+                            <section class="relative">
+                                <span class="material-icons absolute left-3 top-2.5 text-primary text-sm">person</span>
+                                <input
+                                    class="w-full bg-white dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white pl-10"
+                                    placeholder="Nombre del técnico encargado" required="" type="text" />
+                            </section>
+                        </section>
+                        <section class="grid grid-cols-2 gap-4">
+                            <section>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Fecha
+                                    Reporte</label>
+                                <input
+                                    class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white transition-all text-sm"
+                                    required="" type="date" />
+                            </section>
+                            <section>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Lote / Ave</label>
+                                <select
+                                    class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white text-sm">
+                                    <option>Seleccione Lote...</option>
+                                    <option>Lote A-22</option>
+                                    <option>Lote B-15</option>
+                                    <option>Lote C-08</option>
+                                </select>
+                            </section>
+                        </section>
+                        <section>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Síntomas / Causas
+                                Probables</label>
+                            <select
+                                class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white text-sm min-h-[100px] p-2"
+                                multiple="">
+                                <option value="decaimiento">Decaimiento</option>
+                                <option value="falta-apetito">Falta de apetito</option>
+                                <option value="problemas-respiratorios">Problemas respiratorios</option>
+                                <option value="diarrea">Diarrea</option>
+                                <option value="secrecion-nasal">Secreción nasal</option>
+                                <option value="plumaje-erizado">Plumaje erizado</option>
+                            </select>
+                            <p class="text-[10px] text-slate-400 mt-1 px-1">Mantenga presionado Ctrl (Cmd) para
+                                seleccionar varios</p>
+                        </section>
+                        <section class="grid grid-cols-2 gap-4">
+                            <section>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Grado de
+                                    Afectación</label>
+                                <select
+                                    class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white text-sm">
+                                    <option value="leve">🟢 Leve</option>
+                                    <option value="moderado">🟡 Moderado</option>
+                                    <option value="critico">🔴 Crítico</option>
+                                </select>
+                            </section>
+                            <section>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Aves
+                                    Afectadas</label>
+                                <input
+                                    class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white text-sm"
+                                    placeholder="Cantidad" type="number" />
+                            </section>
+                        </section>
+                        <section>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Acción
+                                Inmediata</label>
+                            <select
+                                class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white text-sm">
+                                <option value="">Seleccione acción...</option>
+                                <option value="aislamiento">Aislamiento</option>
+                                <option value="inicio-tratamiento">Inicio de tratamiento</option>
+                                <option value="cuarentena-galpon">Cuarentena de Galpón</option>
+                                <option value="revision-veterinaria">Revisión Veterinaria</option>
+                            </select>
+                        </section>
+                        <section>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Observaciones
+                                Técnicas</label>
+                            <textarea
+                                class="w-full bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-primary/20 rounded-lg focus:ring-primary focus:border-primary dark:text-white text-sm"
+                                placeholder="Detalles adicionales observados..." rows="2"></textarea>
+                        </section>
+                        <button
+                            class="w-full bg-primary hover:bg-accent text-white font-bold py-3 rounded-lg transition-all flex justify-center items-center gap-2 shadow-lg shadow-primary/20"
+                            type="submit">
+                            <span class="material-icons text-sm">report_problem</span>
+                            Registrar Morbilidad
+                        </button>
+                    </form>
+                </section>
+                <section class="space-y-3">
+                    <h3 class="text-xs font-bold uppercase text-slate-500 px-1">Alertas Sanitarias</h3>
+                    <section class="bg-red-500/10 border-l-4 border-red-500 p-3 rounded-r-lg">
+                        <section class="flex justify-between items-start">
+                            <p class="text-xs font-bold text-red-500">ALTA MORBILIDAD</p>
+                            <span class="text-[10px] text-slate-500">Reciente</span>
+                        </section>
+                        <p class="text-sm font-medium mt-1">Lote A-22 presenta 15% de afectación respiratoria.</p>
+                    </section>
+                </section>
+            </aside>
+            <section class="xl:col-span-8 space-y-8">
+                <section
+                    class="bg-white dark:bg-background-dark/40 border border-slate-200 dark:border-primary/10 rounded-xl p-6 shadow-xl">
+                    <section class="flex justify-between items-center mb-6">
+                        <section class="flex items-center gap-2">
+                            <span class="material-icons text-secondary">monitor_heart</span>
+                            <h3 class="text-lg font-semibold">Estado de Lotes - Hoy</h3>
+                        </section>
+                    </section>
+                    <section class="flex gap-4 overflow-x-auto pb-4">
+                        <section
+                            class="min-w-[200px] bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-primary/30 p-4 rounded-xl relative">
+                            <section class="absolute top-2 right-2">
+                                <span class="w-2 h-2 bg-primary rounded-full inline-block animate-pulse"></span>
+                            </section>
+                            <p class="text-[10px] font-bold text-primary uppercase mb-1">Lote C-08</p>
+                            <h4 class="font-bold text-sm mb-1">Salud Óptima</h4>
+                            <p class="text-[10px] text-slate-500">0 aves afectadas</p>
+                        </section>
+                        <section class="min-w-[200px] bg-amber-500/5 border border-amber-500/30 p-4 rounded-xl relative">
+                            <p class="text-[10px] font-bold text-amber-500 uppercase mb-1">Lote B-15</p>
+                            <h4 class="font-bold text-sm mb-1">Bajo Vigilancia</h4>
+                            <p class="text-[10px] text-slate-500">3 aves con decaimiento</p>
+                        </section>
+                        <section class="min-w-[200px] bg-red-500/5 border border-red-500/30 p-4 rounded-xl relative">
+                            <p class="text-[10px] font-bold text-red-500 uppercase mb-1">Lote A-22</p>
+                            <h4 class="font-bold text-sm mb-1">Crítico - Cuarentena</h4>
+                            <p class="text-[10px] text-slate-500">75 aves afectadas</p>
+                        </section>
+                    </section>
+                </section>
+                <section
+                    class="bg-white dark:bg-background-dark/40 border border-slate-200 dark:border-primary/10 rounded-xl shadow-xl overflow-hidden">
+                    <section
+                        class="p-6 border-b border-slate-200 dark:border-primary/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <section class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">history</span>
+                            <h3 class="text-lg font-semibold">Historial de Morbilidad</h3>
+                        </section>
+                        <section class="flex gap-3">
+                            <section class="relative">
+                                <input
+                                    class="bg-slate-100 dark:bg-background-dark border-none rounded-lg text-sm pl-9 py-2 focus:ring-1 focus:ring-primary w-48"
+                                    placeholder="Filtrar por lote..." type="text" />
+                                <span
+                                    class="material-icons absolute left-2.5 top-2 text-slate-400 text-lg">search</span>
+                            </section>
+                            <button
+                                class="bg-secondary/10 hover:bg-secondary/20 text-secondary p-2 rounded-lg transition-colors">
+                                <span class="material-icons text-sm">file_download</span>
+                            </button>
+                        </section>
+                    </section>
+                    <section class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead
+                                class="bg-slate-50 dark:bg-background-dark/60 text-[10px] uppercase font-bold text-slate-500 tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-4">Fecha</th>
+                                    <th class="px-6 py-4">Lote</th>
+                                    <th class="px-6 py-4">Síntomas Reportados</th>
+                                    <th class="px-6 py-4">Afectación</th>
+                                    <th class="px-6 py-4">Acción</th>
+                                    <th class="px-6 py-4">Responsable</th>
+                                    <th class="px-6 py-4"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 dark:divide-primary/10 text-sm">
+                                <tr class="hover:bg-primary/5 transition-colors">
+                                    <td class="px-6 py-4 font-medium">20/10/2023</td>
+                                    <td class="px-6 py-4">Lote A-22</td>
+                                    <td class="px-6 py-4 text-xs">Prob. Respiratorios, Decaimiento</td>
+                                    <td class="px-6 py-4"><span
+                                            class="bg-red-500/20 text-red-500 px-2 py-1 rounded text-[10px] font-bold uppercase">Crítico</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-xs">Aislamiento</td>
+                                    <td class="px-6 py-4 text-xs">Carlos Ruíz</td>
+                                    <td class="px-6 py-4"><button class="text-slate-400 hover:text-primary"><span
+                                                class="material-icons text-sm">visibility</span></button></td>
+                                </tr>
+                                <tr class="hover:bg-primary/5 transition-colors">
+                                    <td class="px-6 py-4 font-medium">19/10/2023</td>
+                                    <td class="px-6 py-4">Lote B-15</td>
+                                    <td class="px-6 py-4 text-xs">Falta de apetito</td>
+                                    <td class="px-6 py-4"><span
+                                            class="bg-amber-500/20 text-amber-500 px-2 py-1 rounded text-[10px] font-bold uppercase">Moderado</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-xs">Inicio Tratamiento</td>
+                                    <td class="px-6 py-4 text-xs">Ana Lucia</td>
+                                    <td class="px-6 py-4"><button class="text-slate-400 hover:text-primary"><span
+                                                class="material-icons text-sm">visibility</span></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </main>
+
+    <script src="./assets/js/morbilidad.js"></script>
+</body>
+
+</html>

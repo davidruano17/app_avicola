@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Registro de Mortalidad - AVISENA COL</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="assets/css/mortalidad.css">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#49E619",
+                        "success": "#39A900",
+                        "success-dark": "#007832",
+                        "warning": "#f59e0b",
+                        "danger": "#ef4444",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#141d1e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body class="main-body">
+    <section class="layout-container">
+        <main class="main-container">
+            <section class="header-container">
+                <section class="header-text">
+                    <h1 class="title">Mortalidad de las aves</h1>
+                    <p class="description">Registra y gestiona organizadamente los datos relacionados con la mortalidad de las aves, dentro de tu unidad avícola.</p>
+                </section>
+            </section>
+            <!-- Notification Area -->
+            <section class="notification-container">
+                <section  id="success" class="success-message hidden">
+                    <span class="material-icons icon-check">check_circle</span>
+                    <span class="message-text">Registro Guardado Exitosamente: El reporte ha sido sincronizado con la base de datos central.</span>
+                    <button type="button" class="close-button">
+                        <span class="material-icons close-icon">close</span>
+                    </button>
+                </section>
+            </section>
+            <section class="main-grid">
+                <!-- Entry Form Section -->
+                <section class="form-section">
+                    <section class="form-card">
+                        <section class="section-header">
+                            <span class="material-icons text-primary">add_box</span>
+                            <h2 class="section-title">Nuevo Registro de Mortalidad</h2>
+                        </section>
+                        <form id="mortalityForm" class="mortality-form">
+                            <section class="form-group">
+                                <label class="form-label">Cantidad de Aves Muertas <span class="required">*</span></label>
+                                <section class="input-wrapper">
+                                    <span class="input-icon">
+                                        <span class="material-icons icon-size">count</span>
+                                    </span>
+                                    <input id="cantidad" required class="form-input" placeholder="0" type="number" min="1"/>
+                                </section>
+                            </section>
+                            <section class="form-group">
+                                <label class="form-label">Causa de Muerte <span class="required">*</span></label>
+                                <section class="input-wrapper">
+                                    <span class="input-icon">
+                                        <span class="material-icons icon-size">category</span>
+                                    </span>
+                                    <select id="causa" required class="form-select">
+                                        <option disabled="" selected="" value="">Seleccione una causa</option>
+                                        <option value="Respiratoria">Respiratoria</option>
+                                        <option value="Digestiva">Digestiva</option>
+                                        <option value="Accidente">Accidente</option>
+                                        <option value="Desconocida">Desconocida</option>
+                                    </select>
+                                </section>
+                            </section>
+                            <section class="space-y-1.5">
+                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">Resultado de Necropsia <span class="text-red-500">*</span></label>
+                                <textarea id="necropsia" class="w-full px-4 py-2.5 rounded-lg border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background-dark/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none resize-none" placeholder="Describa los hallazgos encontrados..." required="" rows="4"></textarea>
+                            </section>
+                            <section class="grid grid-cols-1 sm:grid-cols-1 gap-4 pt-4">
+                                <button class="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20" type="submit">
+                                    <span class="material-icons text-sm">save</span>Guardar Registro</button>
+                            </section>
+                        </form>
+                    </section>
+                    <!-- Guidelines Card -->
+                    <section class="mt-6 p-4 rounded-xl border border-dashed border-primary/30 bg-primary/5">
+                        <h3 class="text-sm font-semibold flex items-center gap-2 text-primary mb-2">
+                            <span class="material-icons text-sm">info</span>Recordatorio de Procedimiento
+                        </h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Toda necropsia debe realizarse bajo condiciones de bioseguridad. Asegúrese de desinfectar el área y desechar correctamente los restos orgánicos según el protocolo institucional.</p>
+                    </section>
+                </section>
+                <!-- Historical Table Section -->
+                <section class="lg:col-span-7">
+                    <section class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-sm overflow-hidden flex flex-col h-full">
+                        <section class="p-6 border-b border-slate-200 dark:border-border-dark flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <section class="flex items-center gap-2">
+                                <span class="material-icons text-primary">history</span>
+                                <h2 class="text-lg font-semibold">Historial de Mortalidad</h2>
+                            </section>
+                            <section class="relative">
+                                <input id="buscar" class="w-full sm:w-64 pl-9 pr-4 py-1.5 rounded-full border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background-dark/50 text-xs focus:ring-1 focus:ring-primary outline-none" placeholder="Buscar registros..." type="text" />
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                    <span class="material-icons text-sm">search</span>
+                                </span>
+                            </section>
+                        </section>
+                        <section class="flex-grow overflow-x-auto custom-scrollbar">
+                            <table class="font-size w-full text-left">
+                                <thead class="bg-slate-50 dark:bg-background-dark/80 sticky top-0">
+                                    <tr>
+                                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Fecha</th>
+                                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-center"> Cantidad</th>
+                                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider"> Causa</th>
+                                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaHistorial" class="divide-y divide-slate-100 dark:divide-border-dark"></tbody>
+                            </table>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </main>
+
+             <!-- Analytical Overview (Decorative) -->
+        <section class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8 px-20">
+            <section class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark flex items-center gap-4">
+                <section class="h-10 w-10 rounded-lg bg-red-100 dark:bg-red-900/20 flex items-center justify-center">
+                    <span class="material-icons text-red-500">trending_up</span>
+                </section>
+                <section>        
+                    <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Mortalidad Total Mensual</p>
+                    <section id="totalMortalidad" class="text-xl font-bold">0</section>
+                </section>
+            </section>
+            <section class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark flex items-center gap-4">
+                <section class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <span class="material-icons text-primary">analytics</span>
+                </section>
+                <section>
+                    <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Causa Principal</p>
+                    <section id="causaPrincipal" class="text-xl font-bold">--</section>
+                </section>
+            </section>
+            <section class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark flex items-center gap-4">
+                <section class="h-10 w-10 rounded-lg bg-secondary-teal/10 flex items-center justify-center">
+                    <span class="material-icons text-secondary-teal">task_alt</span>
+                </section>
+                <section>
+                    <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Actas Generadas</p>
+                    <section id="actasGeneradas" class="text-xl font-bold">0</section>
+                </section>
+            </section>
+            <section class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark flex items-center gap-4 relative overflow-hidden">
+                <section class="h-10 w-10 rounded-lg bg-amber-100 dark:bg-amber-900/20 flex items-center justify-center">
+                    <span class="material-icons text-amber-500">warning</span>
+                </section>
+                <section>
+                    <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Tasa de Mortalidad</p>
+                    <section id="tasaMortalidad" class="text-xl font-bold">0%</section>
+                </section>
+            </section>
+        </section>
+            <footer class="mt-auto py-8 border-t border-slate-200 dark:border-border-dark text-center">
+                <section class="flex flex-col items-center gap-4">
+                    <section class="flex items-center gap-6 opacity-60">
+                        
+                        <section class="flex flex-col items-center">
+                            <span class="text-xs">Sistema de Gestión Avicola</span>
+                        </section>
+                    </section>
+                    <p class="text-[11px] text-slate-500">© 2026 AVISENA COL</p>
+                </section>
+            </footer>
+        </section>
+   
+    <script type="text/javascript" src="assets/js/mortalidad.js"></script>
+</body>
+
+</html>
