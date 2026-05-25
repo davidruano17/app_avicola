@@ -111,3 +111,29 @@
     });
 
     renderTabla();
+
+    const modal = document.getElementById("modalMortalidad");
+    const abrirModal = document.getElementById("abrirModal");
+    const cerrarModal = document.getElementById("cerrarModal");
+    const cancelarModal = document.getElementById("cancelarModal");
+
+    abrirModal.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+    });
+
+    function cerrarVentanaModal() {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+    }
+
+    cerrarModal.addEventListener("click", cerrarVentanaModal);
+
+    cancelarModal.addEventListener("click", cerrarVentanaModal);
+
+    // Cerrar haciendo click afuera
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            cerrarVentanaModal();
+        }
+    });
